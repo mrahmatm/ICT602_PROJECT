@@ -1,6 +1,8 @@
 package com.example.ict602_grpproject;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -32,6 +34,21 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        /*
+        //letak jap, cara keluarkan popup
+        //declarations ni bole ltk as global var
+        Dialog mDialog;
+        //button ni can be anything yg nk trigger popup
+        Button btnShow;
+
+        btnShow.setOnClickListener(new View.OnClickListener(){
+           @Override
+           public void onClick(View v){
+               mDialog.setContentView(R.layout.map_popup)
+           }
+        });
+        */
     }
 
 }
