@@ -12,7 +12,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-
         /*
         //letak jap, cara keluarkan popup
         //declarations ni bole ltk as global var
