@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-
+        
         /*
         //letak jap, cara keluarkan popup
         //declarations ni bole ltk as global var
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         btnShow.setOnClickListener(new View.OnClickListener(){
            @Override
            public void onClick(View v){
-               mDialog.setContentView(R.layout.map_popup)
+               mDialog.setContentView(R.layout.map_popup);
            }
         });
         */
