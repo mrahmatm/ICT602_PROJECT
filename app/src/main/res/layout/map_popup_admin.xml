@@ -66,9 +66,9 @@
             android:layout_width="120dp"
             android:layout_height="70dp"
             android:layout_below="@id/txtDateTime"
-            android:id="@+id/btnCancel"
+            android:id="@+id/btnEdit"
             android:layout_marginTop="180dp"
-            android:text="DELETE"
+            android:text="EDIT"
             android:layout_weight="30"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"/>
