@@ -54,10 +54,8 @@ public class MapsActivity extends FragmentActivity {
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
         }
         //end of map
-
-        btnOpen = (FloatingActionButton) findViewById(R.id.fbtnOpen);
-        btnAdd = (FloatingActionButton) findViewById(R.id.fbtnAddHazard);
-        btnLogOut = (FloatingActionButton) findViewById(R.id.fbtnLogOut);
+        btnAdd = (FloatingActionButton) findViewById(R.id.btnAdd);
+        btnLogOut = (FloatingActionButton) findViewById(R.id.btnLogOut);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +81,7 @@ public class MapsActivity extends FragmentActivity {
                 //actions bila user log out
             }
         });
+
     }
 
     private void getCurrentLocation() {
