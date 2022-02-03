@@ -1,10 +1,13 @@
 package com.example.ict602_grpproject;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.*;
@@ -19,7 +22,8 @@ public class SignUpPage extends AppCompatActivity {
     EditText username, password;
     Button submit, back;
     RequestQueue signup;
-    final String URL = "http://www.ict602.ml/createUser.php";
+    ProgressBar progress;
+    String URL = "http://www.ict602.ml/createUser.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,7 @@ public class SignUpPage extends AppCompatActivity {
         password = (EditText) findViewById(R.id.SignUp_password);
         submit = (Button) findViewById(R.id.SignUp_submit);
         back = (Button) findViewById(R.id.SignUp_back);
+        progress = (ProgressBar) findViewById(R.id.SignUp_progress);
 
         signup = Volley.newRequestQueue(getApplicationContext());
 
@@ -37,6 +42,8 @@ public class SignUpPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 makeRequest();
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                progress.setVisibility(View.VISIBLE);
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
@@ -51,8 +58,15 @@ public class SignUpPage extends AppCompatActivity {
         StringRequest send = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
-                finish();
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                progress.setVisibility(View.GONE);
+                if (response.equalsIgnoreCase("success")) {
+                    Toast.makeText(getApplicationContext(), "User successfully registered", Toast.LENGTH_LONG).show();
+                    finish();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                }
             }
         }, errorListener) {
             @Override
