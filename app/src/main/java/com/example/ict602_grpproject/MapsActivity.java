@@ -30,6 +30,8 @@ public class MapsActivity extends FragmentActivity {
     SupportMapFragment supportMapFragment;
     FusedLocationProviderClient client;
 
+    Location currentLocation;
+
     FloatingActionButton btnOpen, btnAdd, btnLogOut;
 
     @Override
@@ -54,6 +56,7 @@ public class MapsActivity extends FragmentActivity {
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
         }
         //end of map
+
         btnAdd = (FloatingActionButton) findViewById(R.id.btnAdd);
         btnLogOut = (FloatingActionButton) findViewById(R.id.btnLogOut);
 
@@ -63,11 +66,8 @@ public class MapsActivity extends FragmentActivity {
                 Intent i = new Intent(MapsActivity.this, AddMarker.class);
 
                 //boleh pass value to the next intent gini
-                        /*
-                        i.putExtra("weight", String.valueOf(currentTarget.getWeight()));
-                        i.putExtra("height", String.valueOf(currentTarget.getHeight()));
-                        i.putExtra("BMI", String.valueOf(currentTarget.getBMI()));
-                        */
+
+                i.putExtra("currentLocation", currentLocation);
 
                 startActivity(i);
 
@@ -111,12 +111,12 @@ public class MapsActivity extends FragmentActivity {
                             LatLng latLng = new LatLng(location.getLatitude(),
                                     location.getLongitude());
                             //Create marker options
-                            MarkerOptions options = new MarkerOptions()
-                                    .position(latLng)
-                                    .title("I am here");
+                            MarkerOptions options = new MarkerOptions().position(latLng).title("I am here");
                             //zoom map scale 15
                             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                             googleMap.addMarker(options);
+
+                            currentLocation = location;
                         }
                     });
                 }
