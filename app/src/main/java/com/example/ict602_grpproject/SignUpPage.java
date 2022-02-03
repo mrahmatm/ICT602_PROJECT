@@ -52,6 +52,7 @@ public class SignUpPage extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG).show();
+                finish();
             }
         }, errorListener) {
             @Override
