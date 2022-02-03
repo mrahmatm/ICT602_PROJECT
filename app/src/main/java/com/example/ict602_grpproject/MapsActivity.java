@@ -79,8 +79,22 @@ public class MapsActivity extends FragmentActivity {
         }
         //end of map
 
+        //data passing
+        Bundle extras = getIntent().getExtras();
+
+        //if so, set all the edittext's and textview's based on values retrieved
+        //Location currentLocation = extras.getParcelable("currentLocation");
+        //if log in succressful, pass user id through intent ni
+        //String userID = extras.getString("userID");
+
+        //for now, dummy
+        String userID = "2";
+        //String finalUserID = userID;
+
         btnAdd = (FloatingActionButton) findViewById(R.id.btnAdd);
         btnLogOut = (FloatingActionButton) findViewById(R.id.btnLogOut);
+
+
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,8 +103,8 @@ public class MapsActivity extends FragmentActivity {
 
                 //pass the current location to the add marker class through intent shit
                 i.putExtra("currentLocation", currentLocation);
+                i.putExtra("userID", userID);
                 startActivity(i);
-
 
             }
         });
@@ -138,6 +152,10 @@ public class MapsActivity extends FragmentActivity {
                             //zoom map scale 15
                             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                             googleMap.addMarker(options);
+                            /*
+                            for(MarkerOptions mark: markerOptions){
+                                mMap.addMarker(mark);
+                            } */
 
                             currentLocation = location;
                             sendRequest();
@@ -179,10 +197,12 @@ public class MapsActivity extends FragmentActivity {
             }
 
             for(Marker info: markerList){
-                Double lat= Double.parseDouble(info.getLatitude());
-                Double lng = Double.parseDouble(info.getLongitude());
+                Double lat= Double.valueOf(info.getLatitude());
+                Double lng = Double.valueOf(info.getLongitude());
                 String title = info.getHazard();
                 String snippet = info.getReportedBy();
+
+                //Toast.makeText(getApplicationContext(), "Added Marker!" + lat.toString() + ", " + lng.toString(), Toast.LENGTH_LONG).show();
 
                 MarkerOptions marker= new MarkerOptions().position(new LatLng(lat,lng))
                         .title(title)
@@ -190,6 +210,15 @@ public class MapsActivity extends FragmentActivity {
 
                 mMap.addMarker(marker);
 
+                mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(@NonNull com.google.android.gms.maps.model.Marker marker) {
+                        Intent i = new Intent(MapsActivity.this, EditMarker.class);
+
+
+                        return false;
+                    }
+                });
             }
         }
     };
