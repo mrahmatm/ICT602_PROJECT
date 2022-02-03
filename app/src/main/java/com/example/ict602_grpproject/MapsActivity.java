@@ -127,6 +127,9 @@ public class MapsActivity extends FragmentActivity {
                     supportMapFragment.getMapAsync(new OnMapReadyCallback() {
                         @Override
                         public void onMapReady(GoogleMap googleMap) {
+
+                            mMap = googleMap;
+
                             //Initialize Lat Lng
                             LatLng latLng = new LatLng(location.getLatitude(),
                                     location.getLongitude());
@@ -181,7 +184,7 @@ public class MapsActivity extends FragmentActivity {
                 String title = info.getHazard();
                 String snippet = info.getReportedBy();
 
-                MarkerOptions markerOptions= new MarkerOptions().position(new LatLng(lat,lng))
+                MarkerOptions marker= new MarkerOptions().position(new LatLng(lat,lng))
                         .title(title)
                         .snippet(snippet);
 
