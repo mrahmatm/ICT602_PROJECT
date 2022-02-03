@@ -88,7 +88,7 @@ public class MapsActivity extends FragmentActivity {
         //String userID = extras.getString("userID");
 
         //for now, dummy
-        String userID = "2";
+        String userID = "3";
         //String finalUserID = userID;
 
         btnAdd = (FloatingActionButton) findViewById(R.id.btnAdd);

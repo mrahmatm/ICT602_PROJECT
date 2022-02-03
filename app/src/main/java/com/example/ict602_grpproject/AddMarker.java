@@ -79,10 +79,11 @@ public class AddMarker extends AppCompatActivity {
 
         //data passing
         Bundle extras = getIntent().getExtras();
-
         //if so, set all the edittext's and textview's based on values retrieved
         Location currentLocation = extras.getParcelable("currentLocation");
         String userID = extras.getString("userID");
+        //remark: nanti pass user type sekali
+        String userType = "2";
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -108,11 +109,12 @@ public class AddMarker extends AppCompatActivity {
         });
     }
 
+    //basically POST method
     public void makeRequest(Location currentLocation, String hazardID, String userID, String currentTime){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+                Toast.makeText(getApplicationContext(), "Connection OK!", Toast.LENGTH_SHORT).show();
             }
         }, errorListener){
             @Override
@@ -129,11 +131,17 @@ public class AddMarker extends AppCompatActivity {
         };
 
         queue.add(stringRequest);
-        //Toast.makeText(getApplicationContext(),
-        //        "Hazard Reported!, Coor: " + currentLocation.getLatitude() + ", " + currentLocation.getLongitude()
-        //        , Toast.LENGTH_LONG).show();
         Toast.makeText(getApplicationContext(),
-                "Hazard Reported!, hazard: " + hazardID
+                "Hazard Reported!, Coor: " + currentLocation.getLatitude() + ", " + currentLocation.getLongitude()
+                , Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),
+                "\nHazard Reported!, hazard: " + hazardID
+                , Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),
+                "\nHazard Reported!, datetime: " + currentTime
+                , Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),
+                "\nHazard Reported!, userid: " + userID
                 , Toast.LENGTH_LONG).show();
 
     }
