@@ -11,7 +11,14 @@ import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -23,6 +30,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
+
+import java.util.Vector;
 
 public class MapsActivity extends FragmentActivity {
 
@@ -31,6 +41,15 @@ public class MapsActivity extends FragmentActivity {
     FusedLocationProviderClient client;
 
     Location currentLocation;
+
+    RequestQueue queue;
+    final String URL = "http://www.ict602.ml/getReports.php";
+    Gson gson;
+    Marker[] markerList;
+    MarkerOptions marker;
+    Vector<MarkerOptions> markerOptions;
+    private GoogleMap mMap;
+
 
     FloatingActionButton btnOpen, btnAdd, btnLogOut;
 
@@ -117,6 +136,7 @@ public class MapsActivity extends FragmentActivity {
                             googleMap.addMarker(options);
 
                             currentLocation = location;
+                            sendRequest();
                         }
                     });
                 }
@@ -136,5 +156,45 @@ public class MapsActivity extends FragmentActivity {
             }
         }
     }
+
+    public void sendRequest(){
+        queue = Volley.newRequestQueue(getApplicationContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, onSuccess, onError);
+        queue.add(stringRequest);
+
+    }
+
+    public Response. Listener<String> onSuccess = new Response.Listener<String>() {
+        @Override
+        public void onResponse(String response) {
+            markerList = gson.fromJson(response, Marker[].class);
+
+            if(markerList.length < 1){
+                Toast.makeText(getApplicationContext(), "No Hazards Recorded!", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            for(Marker info: markerList){
+                Double lat= Double.parseDouble(info.getLatitude());
+                Double lng = Double.parseDouble(info.getLongitude());
+                String title = info.getHazard();
+                String snippet = info.getReportedBy();
+
+                MarkerOptions markerOptions= new MarkerOptions().position(new LatLng(lat,lng))
+                        .title(title)
+                        .snippet(snippet);
+
+                mMap.addMarker(marker);
+
+            }
+        }
+    };
+
+    public Response.ErrorListener onError = new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    };
 
 }

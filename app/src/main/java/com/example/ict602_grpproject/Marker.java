@@ -1,50 +1,64 @@
 package com.example.ict602_grpproject;
 
-import android.location.Location;
-
-import com.google.android.gms.maps.model.LatLng;
-
-import java.sql.Time;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class Marker {
-    //object class for marker, tapi lekluh
-    private Location location;
-    private String hazardName;
-    private String hazardType;
-    private String hazardDesc;
-    private int userID;
-    private Time timeReported;
 
-    public Marker(Location inputLocation, String inputName, String inputType, String inputDesc, int inputID, Time inputTime){
-        location = inputLocation;
-        hazardName = inputName;
-        hazardType = inputType;
-        hazardDesc = inputDesc;
-        userID = inputID;
-        timeReported = inputTime;
+    @SerializedName("Hazard")
+    @Expose
+    private String hazard;
+    @SerializedName("Time")
+    @Expose
+    private String time;
+    @SerializedName("Latitude")
+    @Expose
+    private String latitude;
+    @SerializedName("Longitude")
+    @Expose
+    private String longitude;
+    @SerializedName("Reported By")
+    @Expose
+    private String reportedBy;
+
+    public String getHazard() {
+        return hazard;
     }
 
-    public Location getLocation() {
-        return location;
+    public void setHazard(String hazard) {
+        this.hazard = hazard;
     }
 
-    public String getHazardDesc() {
-        return hazardDesc;
+    public String getTime() {
+        return time;
     }
 
-    public String getHazardName() {
-        return hazardName;
+    public void setTime(String time) {
+        this.time = time;
     }
 
-    public String getHazardType() {
-        return hazardType;
+    public String getLatitude() {
+        return latitude;
     }
 
-    public Time getTimeReported(){
-        return timeReported;
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 
-    public int getUserID() {
-        return userID;
+    public String getLongitude() {
+        return longitude;
     }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getReportedBy() {
+        return reportedBy;
+    }
+
+    public void setReportedBy(String reportedBy) {
+        this.reportedBy = reportedBy;
+    }
+
 }

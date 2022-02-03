@@ -12,6 +12,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.sql.Time;
 import java.util.Calendar;
@@ -21,9 +24,6 @@ public class AddMarker extends AppCompatActivity {
 
     Button btnSubmit;
     EditText name, type, desc;
-
-    RequestQueue queue;
-    final String URL = "www.ict602.ml";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,7 @@ public class AddMarker extends AppCompatActivity {
                 int dummyID = 00001;
                 Time dummyTime = new Time(currentTime.getTime());
 
-                Marker newMarker = new Marker(currentLocation, hazardName, hazardType, hazardDesc, dummyID, dummyTime);
+                //Marker newMarker = new Marker(currentLocation, hazardName, hazardType, hazardDesc, dummyID, dummyTime);
 
                 //hold jap, buat read dulu
                 //makeRequest();
@@ -73,5 +73,7 @@ public class AddMarker extends AppCompatActivity {
             }
         });
     } */
+
+
 
 }
