@@ -11,6 +11,8 @@ public class FirstPage extends AppCompatActivity {
 
     Button loginUser, loginAdmin, signUp;
 
+    Button testbutton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +29,17 @@ public class FirstPage extends AppCompatActivity {
                 startActivity(signUp);
             }
         });
+
+        //deletable
+        testbutton = (Button) findViewById(R.id.btnTest);
+        testbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(FirstPage.this, MapsActivity.class);
+                startActivity(i);
+            }
+        });
+        //end of deletable
 
 
     }
