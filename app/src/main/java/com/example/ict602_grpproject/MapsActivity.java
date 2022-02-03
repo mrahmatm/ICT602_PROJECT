@@ -31,6 +31,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.Vector;
 
@@ -58,6 +59,8 @@ public class MapsActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
+        gson = new GsonBuilder().create();
+
         //start of map
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -84,10 +87,8 @@ public class MapsActivity extends FragmentActivity {
             public void onClick(View v) {
                 Intent i = new Intent(MapsActivity.this, AddMarker.class);
 
-                //boleh pass value to the next intent gini
-
+                //pass the current location to the add marker class through intent shit
                 i.putExtra("currentLocation", currentLocation);
-
                 startActivity(i);
 
 
