@@ -31,7 +31,7 @@ import java.util.Map;
 
 public class EditMarker extends AppCompatActivity {
 
-    Button btnSubmit;
+    Button btnSubmit, btnDelete;
 
     RadioGroup radGrp;
     RadioButton radBtn1, radBtn2, radBtn3;
@@ -72,6 +72,7 @@ public class EditMarker extends AppCompatActivity {
         });
 
         btnSubmit = (Button) findViewById(R.id.btnUpdate);
+        btnDelete = (Button)findViewById(R.id.btnDelete);
 
         gson = new GsonBuilder().create();
 
@@ -87,7 +88,18 @@ public class EditMarker extends AppCompatActivity {
                     sendUpdateRequest(targetReport);
                 }
             });
+
+            btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    sendDeleteRequest(targetReport);
+                }
+            });
+        }else{
+           //insert something kalau xleh edit
         }
+
+
 
         //Marker newMarker = new Marker(currentLocation, hazardName, hazardType, hazardDesc, dummyID, dummyTime);
 
