@@ -214,6 +214,7 @@ public class MapsActivity extends FragmentActivity {
 
                 final boolean[] isEditable = {false};
 
+                //on marker click
                 mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(@NonNull com.google.android.gms.maps.model.Marker marker) {

@@ -127,7 +127,8 @@ public class AddMarker extends AppCompatActivity {
 
         queue.add(stringRequest);
         Toast.makeText(getApplicationContext(),
-                "Hazard Reported!, Coor: " + currentLocation.getLatitude() + ", " + currentLocation.getLongitude()
+                "Hazard Reported!, Coor: " + String.valueOf(currentLocation.getLatitude()) + ", " +
+                        String.valueOf(currentLocation.getLongitude())
                 , Toast.LENGTH_LONG).show();
         Toast.makeText(getApplicationContext(),
                 "\nHazard Reported!, hazard: " + hazardID

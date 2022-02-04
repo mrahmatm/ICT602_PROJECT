@@ -39,7 +39,7 @@ public class EditMarker extends AppCompatActivity {
 
     RequestQueue queue;
     final String URLUpdate = "http://www.ict602.ml/getReports.php";
-    //final String URL1 = "http://www.ict602.ml/getSingleReport.php";
+    final String URLDelete = "http://www.ict602.ml/deleteReport.php";
 
     Marker[] markerList;
     Gson gson;
@@ -71,7 +71,7 @@ public class EditMarker extends AppCompatActivity {
             }
         });
 
-        btnSubmit = (Button) findViewById(R.id.btnSubmit);
+        btnSubmit = (Button) findViewById(R.id.btnUpdate);
 
         gson = new GsonBuilder().create();
 
@@ -110,6 +110,27 @@ public class EditMarker extends AppCompatActivity {
                 Map<String, String> params = new HashMap<>();
                 params.put("reportID", reportID);
                 params.put("hazardID", checkedHazard);
+
+                return params;
+            }
+        };
+
+        queue.add(stringRequest);
+
+    }
+
+    public void sendDeleteRequest(String reportID) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLUpdate, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getApplicationContext(), "Connection OK!", Toast.LENGTH_SHORT).show();
+            }
+        }, errorListener) {
+            @Override
+            protected Map<String, String> getParams() {
+                //POST key and values
+                Map<String, String> params = new HashMap<>();
+                params.put("reportID", reportID);
 
                 return params;
             }
