@@ -89,7 +89,7 @@ public class MapsActivity extends FragmentActivity {
         //String userID = extras.getString("userID");
 
         //for now, dummy
-        String userID = "3";
+        String userID = "6";
         currentUserGlobal = userID;
         //String finalUserID = userID;
 
@@ -203,6 +203,7 @@ public class MapsActivity extends FragmentActivity {
                 Double lng = Double.valueOf(info.getLongitude());
                 String title = info.getHazard();
                 String snippet = info.getReportedBy();
+                String hazard = info.getHazardID();
 
                 //Toast.makeText(getApplicationContext(), "Added Marker!" + lat.toString() + ", " + lng.toString(), Toast.LENGTH_LONG).show();
 
@@ -221,6 +222,11 @@ public class MapsActivity extends FragmentActivity {
                         Intent i = new Intent(MapsActivity.this, EditMarker.class);
                         i.putExtra("userID", currentUserGlobal);
                         i.putExtra("reportID", info.getReportID());
+                        i.putExtra("hazardID", hazard);
+
+                        Toast.makeText(getApplicationContext(), "Owner: " + info.getUserID(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Sent ID: " + info.getReportID(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Origin Hazard ID: " + hazard, Toast.LENGTH_SHORT).show();
 
                         if(currentUserGlobal.equals(info.getUserID())){
                             isEditable[0] = true;

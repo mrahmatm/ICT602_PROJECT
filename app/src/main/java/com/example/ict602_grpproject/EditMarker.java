@@ -35,13 +35,15 @@ public class EditMarker extends AppCompatActivity {
 
     RadioGroup radGrp;
     RadioButton radBtn1, radBtn2, radBtn3;
-    String checkedHazard = "1";
+
+    String checkedHazard;
 
     RequestQueue queue;
     final String URLUpdate = "http://www.ict602.ml/getReports.php";
     final String URLDelete = "http://www.ict602.ml/deleteReport.php";
 
     Marker[] markerList;
+    Message[] messageList;
     Gson gson;
 
     @Override
@@ -80,6 +82,14 @@ public class EditMarker extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         boolean isEditable = extras.getBoolean("isEditable");
         String targetReport = extras.getString("reportID");
+        String defaultHazard = extras.getString("hazardID");
+        Toast.makeText(getApplicationContext(), "sent default hazard: " + defaultHazard, Toast.LENGTH_LONG).show();
+
+        switch (defaultHazard){
+            case "1": radBtn1.performClick();
+            case "2": radBtn2.performClick();
+            case "3": radBtn3.performClick();
+        }
 
         if(isEditable){
             btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +106,7 @@ public class EditMarker extends AppCompatActivity {
                 }
             });
         }else{
-           //insert something kalau xleh edit
+           Toast.makeText(getApplicationContext(), "Eh kau xleh edit anat", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -121,6 +131,18 @@ public class EditMarker extends AppCompatActivity {
                 //POST key and values
                 Map<String, String> params = new HashMap<>();
                 params.put("reportID", reportID);
+
+                String checkedHazard;
+
+                switch (radGrp.getCheckedRadioButtonId()){
+                    case R.id.radID1: checkedHazard = "1";
+                    case R.id.radID2: checkedHazard = "2";
+                    case R.id.radID3: checkedHazard = "3";
+                        break;
+                    default:
+                        checkedHazard= "0";
+                }
+
                 params.put("hazardID", checkedHazard);
 
                 return params;
@@ -135,7 +157,12 @@ public class EditMarker extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URLUpdate, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(), "Connection OK!", Toast.LENGTH_SHORT).show();
+                //messageList = gson.fromJson(response, Message[].class);
+
+               // for(Message msg: messageList){
+                 //   String current = msg.getMsg();
+                 //   Toast.makeText(getApplicationContext(), current, Toast.LENGTH_LONG).show();
+                //}
             }
         }, errorListener) {
             @Override
@@ -149,7 +176,7 @@ public class EditMarker extends AppCompatActivity {
         };
 
         queue.add(stringRequest);
-
+        //Toast.makeText(getApplicationContext(), "Target: " + reportID + "New: " + checkedHazard, Toast.LENGTH_LONG).show();
     }
 
         public Response.ErrorListener errorListener = new Response.ErrorListener() {

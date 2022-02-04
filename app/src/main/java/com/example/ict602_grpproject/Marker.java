@@ -25,13 +25,19 @@ public class Marker {
     @Expose
     private String reportedBy;
 
-    @SerializedName("reportID")
+    @SerializedName("ReportID")
     @Expose
     private String reportID;
 
     @SerializedName("UserID")
     @Expose
     private String userID;
+
+    @SerializedName("HazardID")
+    @Expose
+    private String hazardID;
+
+    public String getHazardID(){ return hazardID; }
 
     public String getHazard() {
         return hazard;
