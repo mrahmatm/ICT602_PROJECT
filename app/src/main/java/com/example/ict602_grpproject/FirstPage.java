@@ -2,6 +2,7 @@ package com.example.ict602_grpproject;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
+import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,7 +12,7 @@ import android.widget.Button;
 
 public class FirstPage extends AppCompatActivity {
 
-    Button loginUser, loginAdmin, signUp;
+    Button login, signUp;
 
     Button testbutton;
 
@@ -22,8 +23,7 @@ public class FirstPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_page);
 
-        loginUser = (Button) findViewById(R.id.FirstPage_button);
-        loginUser = (Button) findViewById(R.id.FirstPage_button2);
+        login = (Button) findViewById(R.id.FirstPage_button);
         signUp = (Button) findViewById(R.id.FirstPage_button3);
         aboutButton=(Button)findViewById(R.id.btnAbout);
         signUp.setOnClickListener(new View.OnClickListener() {
@@ -31,6 +31,14 @@ public class FirstPage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent signUp = new Intent(FirstPage.this, SignUpPage.class);
                 startActivity(signUp);
+            }
+        });
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent login = new Intent(FirstPage.this, LoginPage.class);
+                startActivity(login);
             }
         });
 
