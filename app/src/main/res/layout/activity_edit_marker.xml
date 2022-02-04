@@ -10,79 +10,72 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="58dp"
-        android:layout_marginBottom="29dp"
-        android:text="Hazard Name"
+        android:layout_marginStart="146dp"
+        android:layout_marginTop="79dp"
+        android:layout_marginEnd="145dp"
+        android:text="Hazard Type"
         app:flow_horizontalAlign="center"
-        app:layout_constraintBottom_toTopOf="@+id/txtName"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/grpRadio"
+        app:layout_constraintEnd_toEndOf="@+id/grpRadio"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/txtName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="9dp"
-        android:ems="10"
-        android:hint="Enter Hazard Name"
-        android:inputType="text"
-        app:flow_horizontalAlign="center"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+    <RadioGroup
+        android:id="@+id/grpRadio"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="41dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="83dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnUpdate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="29dp"
-        android:text="Description"
-        app:flow_horizontalAlign="center"
-        app:layout_constraintBottom_toTopOf="@+id/txtDesc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtName" />
+        <RadioButton
+            android:id="@+id/radID1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
 
-    <EditText
-        android:id="@+id/txtDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="100dp"
-        android:layout_marginBottom="64dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        app:flow_horizontalAlign="center"
-        app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            android:text="Road Obstruction" />
+
+        <RadioButton
+            android:id="@+id/radID2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Slippery Road" />
+
+        <RadioButton
+            android:id="@+id/radID3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dangerous Pothole" />
+    </RadioGroup>
 
     <Button
-        android:id="@+id/btnSubmit"
+        android:id="@+id/btnUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="114dp"
-        android:text="SUBMIT"
+        android:layout_marginBottom="286dp"
+        android:text="UPDATE"
         app:flow_horizontalAlign="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/txtDesc"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDesc" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnDelete"
+        app:layout_constraintTop_toBottomOf="@+id/grpRadio" />
 
     <Button
         android:id="@+id/btnDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="114dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="24dp"
         android:text="DELETE"
         app:flow_horizontalAlign="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/txtDesc"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDesc"
-        app:layout_constraintVertical_bias="0.74" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnUpdate"
+        app:layout_constraintEnd_toStartOf="@+id/btnUpdate"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

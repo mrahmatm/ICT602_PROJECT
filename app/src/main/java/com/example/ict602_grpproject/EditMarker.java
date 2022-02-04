@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,17 +22,23 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.net.URL;
 import java.sql.Time;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EditMarker extends AppCompatActivity {
 
     Button btnSubmit;
-    EditText name, type, desc;
+
+    RadioGroup radGrp;
+    RadioButton radBtn1, radBtn2, radBtn3;
+    String checkedHazard = "1";
 
     RequestQueue queue;
-    final String URL = "http://www.ict602.ml/getReports.php";
+    final String URLUpdate = "http://www.ict602.ml/getReports.php";
     //final String URL1 = "http://www.ict602.ml/getSingleReport.php";
 
     Marker[] markerList;
@@ -39,77 +47,84 @@ public class EditMarker extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_marker);
+        setContentView(R.layout.activity_edit_marker);
+
+        radGrp = (RadioGroup) findViewById(R.id.grpRadio);
+        radBtn1 = (RadioButton) findViewById(R.id.radID1);
+        radBtn2 = (RadioButton) findViewById(R.id.radID2);
+        radBtn3 = (RadioButton) findViewById(R.id.radID3);
+
+        radGrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.radID1:
+                        checkedHazard = "1";
+                        break;
+                    case R.id.radID2:
+                        checkedHazard = "2";
+                        break;
+                    case R.id.radID3:
+                        checkedHazard = "3";
+                        break;
+                }
+            }
+        });
 
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
 
-        name = (EditText) findViewById(R.id.txtName);
-        desc = (EditText) findViewById(R.id.txtDesc);
-
         gson = new GsonBuilder().create();
-
-        //remarks: kena receive userID + hazardID
 
         //data passing
         Bundle extras = getIntent().getExtras();
+        boolean isEditable = extras.getBoolean("isEditable");
+        String targetReport = extras.getString("reportID");
 
-        Date currentTime = Calendar.getInstance().getTime();
-
-        String userID = extras.getString("userID");
-
-        Time dummyTime = new Time(currentTime.getTime());
+        if(isEditable){
+            btnSubmit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    sendUpdateRequest(targetReport);
+                }
+            });
+        }
 
         //Marker newMarker = new Marker(currentLocation, hazardName, hazardType, hazardDesc, dummyID, dummyTime);
 
         //hold jap, buat read dulu
-        sendRequest();
+
 
 
     }
-/*
-    public void makeRequest(){
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+
+    public void sendUpdateRequest(String reportID) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLUpdate, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+                Toast.makeText(getApplicationContext(), "Connection OK!", Toast.LENGTH_SHORT).show();
             }
-        });
-    } */
+        }, errorListener) {
+            @Override
+            protected Map<String, String> getParams() {
+                //POST key and values
+                Map<String, String> params = new HashMap<>();
+                params.put("reportID", reportID);
+                params.put("hazardID", checkedHazard);
 
-    public void sendRequest(){
-        queue = Volley.newRequestQueue(getApplicationContext());
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, onSuccess, onError);
+                return params;
+            }
+        };
+
         queue.add(stringRequest);
 
     }
 
-    public Response. Listener<String> onSuccess = new Response.Listener<String>() {
-        @Override
-        public void onResponse(String response) {
-            //if success
-
-            markerList = gson.fromJson(response, Marker[].class);
-
-            if(markerList.length < 1){
-                Toast.makeText(getApplicationContext(), "No Hazards Recorded!", Toast.LENGTH_LONG).show();
-                return;
+        public Response.ErrorListener errorListener = new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
-
-            name.setText(markerList[0].getHazard());
-
-            //desc.setText(markerList[0].get);
-
-            Toast.makeText(getApplicationContext(), "Hazard Loaded!", Toast.LENGTH_LONG).show();
-        }
-    };
-
-    public Response.ErrorListener onError = new Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            //if fail
-            Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-        }
-    };
+        };
 
 
 }

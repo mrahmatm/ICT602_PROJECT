@@ -8,18 +8,30 @@ public class Marker {
     @SerializedName("Hazard")
     @Expose
     private String hazard;
+
     @SerializedName("Time")
     @Expose
     private String time;
+
     @SerializedName("Latitude")
     @Expose
     private String latitude;
+
     @SerializedName("Longitude")
     @Expose
     private String longitude;
+
     @SerializedName("Reported By")
     @Expose
     private String reportedBy;
+
+    @SerializedName("reportID")
+    @Expose
+    private String reportID;
+
+    @SerializedName("UserID")
+    @Expose
+    private String userID;
 
     public String getHazard() {
         return hazard;
@@ -60,5 +72,9 @@ public class Marker {
     public void setReportedBy(String reportedBy) {
         this.reportedBy = reportedBy;
     }
+
+    public String getReportID(){ return reportID; }
+
+    public String getUserID(){ return userID; }
 
 }

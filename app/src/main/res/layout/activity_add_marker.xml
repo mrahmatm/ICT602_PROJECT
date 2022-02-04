@@ -10,10 +10,9 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="145dp"
+        android:layout_marginStart="146dp"
         android:layout_marginTop="79dp"
-        android:layout_marginEnd="144dp"
-        android:layout_marginBottom="11dp"
+        android:layout_marginEnd="145dp"
         android:text="Hazard Type"
         app:flow_horizontalAlign="center"
         app:layout_constraintBottom_toTopOf="@+id/grpRadio"
@@ -25,74 +24,46 @@
         android:id="@+id/grpRadio"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="42dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        android:layout_marginStart="41dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="239dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Road Obstruction"
             android:id="@+id/radID1"
-
-            android:checked="true"/>
-
-        <RadioButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Slippery Road"
+            android:checked="true"
+
+            android:text="Road Obstruction" />
+
+        <RadioButton
             android:id="@+id/radID2"
-           />
-
-        <RadioButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Dangerous Pothole"
+            android:text="Slippery Road" />
+
+        <RadioButton
             android:id="@+id/radID3"
-            />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dangerous Pothole" />
     </RadioGroup>
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="27dp"
-        android:text="Description"
-        app:flow_horizontalAlign="center"
-        app:layout_constraintBottom_toTopOf="@+id/txtDesc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grpRadio" />
-
-    <EditText
-        android:id="@+id/txtDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginBottom="22dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        app:flow_horizontalAlign="center"
-        app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
         android:id="@+id/btnSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="129dp"
+        android:layout_marginBottom="130dp"
         android:text="SUBMIT"
         app:flow_horizontalAlign="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtDesc" />
+        app:layout_constraintTop_toBottomOf="@+id/grpRadio" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

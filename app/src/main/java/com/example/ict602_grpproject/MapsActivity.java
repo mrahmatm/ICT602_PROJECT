@@ -51,6 +51,7 @@ public class MapsActivity extends FragmentActivity {
     Vector<MarkerOptions> markerOptions;
     private GoogleMap mMap;
 
+    String currentUserGlobal;
 
     FloatingActionButton btnOpen, btnAdd, btnLogOut;
 
@@ -89,6 +90,7 @@ public class MapsActivity extends FragmentActivity {
 
         //for now, dummy
         String userID = "3";
+        currentUserGlobal = userID;
         //String finalUserID = userID;
 
         btnAdd = (FloatingActionButton) findViewById(R.id.btnAdd);
@@ -210,11 +212,21 @@ public class MapsActivity extends FragmentActivity {
 
                 mMap.addMarker(marker);
 
+                final boolean[] isEditable = {false};
+
                 mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(@NonNull com.google.android.gms.maps.model.Marker marker) {
                         Intent i = new Intent(MapsActivity.this, EditMarker.class);
+                        i.putExtra("userID", currentUserGlobal);
+                        i.putExtra("reportID", info.getReportID());
 
+                        if(currentUserGlobal.equals(info.getUserID())){
+                            isEditable[0] = true;
+                        }
+
+                        i.putExtra("isEditable", isEditable[0]);
+                        startActivity(i);
 
                         return false;
                     }

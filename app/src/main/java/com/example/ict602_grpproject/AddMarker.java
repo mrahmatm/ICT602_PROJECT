@@ -72,11 +72,6 @@ public class AddMarker extends AppCompatActivity {
 
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
 
-        name = (EditText) findViewById(R.id.txtName);
-       // type = (EditText) findViewById(R.id.txtHazardType);
-        desc = (EditText) findViewById(R.id.txtDesc);
-
-
         //data passing
         Bundle extras = getIntent().getExtras();
         //if so, set all the edittext's and textview's based on values retrieved
