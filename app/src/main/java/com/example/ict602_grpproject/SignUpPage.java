@@ -1,6 +1,5 @@
 package com.example.ict602_grpproject;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -60,6 +59,8 @@ public class SignUpPage extends AppCompatActivity {
             public void onResponse(String response) {
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 progress.setVisibility(View.GONE);
+
+                //check data insert result via echo
                 if (response.equalsIgnoreCase("success")) {
                     Toast.makeText(getApplicationContext(), "User successfully registered", Toast.LENGTH_LONG).show();
                     finish();
