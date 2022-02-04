@@ -1,5 +1,7 @@
 package com.example.ict602_grpproject;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,6 +15,8 @@ public class FirstPage extends AppCompatActivity {
 
     Button testbutton;
 
+    Button aboutButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +25,7 @@ public class FirstPage extends AppCompatActivity {
         loginUser = (Button) findViewById(R.id.FirstPage_button);
         loginUser = (Button) findViewById(R.id.FirstPage_button2);
         signUp = (Button) findViewById(R.id.FirstPage_button3);
-
+        aboutButton=(Button)findViewById(R.id.btnAbout);
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,6 +45,10 @@ public class FirstPage extends AppCompatActivity {
         });
         //end of deletable
 
-
+            //nanti yg deletable ni aku nak letak about button, so for now dia compact sikit la sbb nak test
+    }
+    public void About ( View view){
+        Intent intent = new Intent( FirstPage.this, AboutPage.class);
+        startActivity(intent);
     }
 }

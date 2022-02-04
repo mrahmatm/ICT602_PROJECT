@@ -4,4 +4,6 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_maps">MapsActivity</string>
+
+    <string name="hyperlink"><a href="https://github.com/mrahmatm/ICT602_PROJECT.git">WWW.GITHUB.COM</a></string>
 </resources>
