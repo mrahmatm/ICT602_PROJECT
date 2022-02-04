@@ -102,6 +102,7 @@ public class EditMarker extends AppCompatActivity {
 
                     String selected = checkRadio(v);
                     sendUpdateRequest(targetReport, selected);
+                    finish();
                 }
             });
 
@@ -136,7 +137,7 @@ public class EditMarker extends AppCompatActivity {
         };
 
         queueU.add(stringRequest);
-        Toast.makeText(getApplicationContext(), "You're in the sendupdate!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Hazard Updated!", Toast.LENGTH_SHORT).show();
     }
 
     public void sendDeleteRequest(String reportID) {
@@ -157,7 +158,7 @@ public class EditMarker extends AppCompatActivity {
         };
 
         queueD.add(stringRequest);
-        Toast.makeText(getApplicationContext(), "You're in the sendDelete!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Hazard Deleted!", Toast.LENGTH_SHORT).show();
     }
 
         public Response.ErrorListener errorListener = new Response.ErrorListener() {

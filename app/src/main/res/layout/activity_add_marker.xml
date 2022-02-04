@@ -11,11 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="146dp"
-        android:layout_marginTop="79dp"
+        android:layout_marginTop="77dp"
         android:layout_marginEnd="145dp"
         android:text="Hazard Type"
         app:flow_horizontalAlign="center"
-        app:layout_constraintBottom_toTopOf="@+id/grpRadio"
         app:layout_constraintEnd_toEndOf="@+id/grpRadio"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,12 +24,13 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="41dp"
+        android:layout_marginTop="21dp"
         android:layout_marginEnd="41dp"
-        android:layout_marginBottom="239dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
+        android:layout_marginBottom="26dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toTopOf="@+id/textView">
 
         <RadioButton
             android:id="@+id/radID1"
@@ -53,17 +53,50 @@
             android:text="Dangerous Pothole" />
     </RadioGroup>
 
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="22dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
     <Button
         android:id="@+id/btnSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="130dp"
+        android:layout_marginStart="63dp"
+        android:layout_marginBottom="66dp"
         android:text="SUBMIT"
         app:flow_horizontalAlign="center"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/mapView" />
+
+    <Button
+        android:id="@+id/btnPickLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="61dp"
+        android:text="LOCATION"
+        app:flow_horizontalAlign="center"
+        app:layout_constraintEnd_toEndOf="@+id/mapView"
+        app:layout_constraintTop_toBottomOf="@+id/mapView" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="296dp"
+        android:text="Please tap on the hazard's location on the map"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grpRadio" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

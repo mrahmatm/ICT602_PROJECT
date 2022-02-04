@@ -264,13 +264,14 @@ public class MapsActivity extends FragmentActivity {
                             Toast.makeText(getApplicationContext(), "Perh boleh edit sia", Toast.LENGTH_LONG).show();
                         }
 
+                        i.putExtra("currentLocation", currentLocation);
                         i.putExtra("userID", currentUserGlobal);
                         i.putExtra("reportID",reportID);
                         i.putExtra("hazardID", hazardID);
                         i.putExtra("isEditable", isEditable[0]);
                         //finish();
                         startActivity(i);
-                        Toast.makeText(getApplicationContext(), "Clicked: on custom marker!", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "Clicked: on custom marker!", Toast.LENGTH_SHORT).show();
                         return false;
                     }else{
                         Toast.makeText(getApplicationContext(), "This is you!", Toast.LENGTH_SHORT).show();
