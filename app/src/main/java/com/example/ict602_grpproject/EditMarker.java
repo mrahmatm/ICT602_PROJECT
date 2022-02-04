@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +36,8 @@ public class EditMarker extends AppCompatActivity {
 
     RadioGroup radGrp;
     RadioButton radBtn1, radBtn2, radBtn3;
+
+    TextView preview;
 
     String checkedHazard;
 
@@ -83,6 +86,19 @@ public class EditMarker extends AppCompatActivity {
         boolean isEditable = extras.getBoolean("isEditable");
         String targetReport = extras.getString("reportID");
         String defaultHazard = extras.getString("hazardID");
+
+        //preview.findViewById(R.id.txtPreviewID);
+        /*
+
+        i.putExtra("userID", currentUserGlobal);
+                    i.putExtra("reportID",reportID);
+                    i.putExtra("hazardID", hazardID);
+                    i.putExtra("isEditable", isEditable[0]);
+
+         */
+
+        //preview.setText("Hazard ID: " + defaultHazard.toString());
+
         Toast.makeText(getApplicationContext(), "sent default hazard: " + defaultHazard, Toast.LENGTH_LONG).show();
 
         switch (defaultHazard){

@@ -15,7 +15,6 @@
         android:layout_marginEnd="145dp"
         android:text="Hazard Type"
         app:flow_horizontalAlign="center"
-        app:layout_constraintBottom_toTopOf="@+id/grpRadio"
         app:layout_constraintEnd_toEndOf="@+id/grpRadio"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,12 +24,13 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="41dp"
+        android:layout_marginTop="19dp"
         android:layout_marginEnd="41dp"
-        android:layout_marginBottom="83dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnUpdate"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtPreviewID"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toTopOf="@+id/textView">
 
         <RadioButton
             android:id="@+id/radID1"
@@ -57,25 +57,32 @@
         android:id="@+id/btnUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="286dp"
+        android:layout_marginStart="28dp"
         android:text="UPDATE"
         app:flow_horizontalAlign="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnDelete"
-        app:layout_constraintTop_toBottomOf="@+id/grpRadio" />
+        app:layout_constraintStart_toEndOf="@+id/txtPreviewID"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="76dp"
         android:text="DELETE"
         app:flow_horizontalAlign="center"
-        app:layout_constraintBaseline_toBaselineOf="@+id/btnUpdate"
-        app:layout_constraintEnd_toStartOf="@+id/btnUpdate"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnUpdate" />
+
+    <TextView
+        android:id="@+id/txtPreviewID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginBottom="20dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/btnDelete"
+        app:layout_constraintStart_toEndOf="@+id/btnDelete" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

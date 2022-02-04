@@ -33,6 +33,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.HashMap;
+import java.util.StringTokenizer;
 import java.util.Vector;
 
 public class MapsActivity extends FragmentActivity {
@@ -191,6 +193,7 @@ public class MapsActivity extends FragmentActivity {
     public Response. Listener<String> onSuccess = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
+            HashMap<LatLng, String> map = new HashMap<LatLng, String>();
             markerList = gson.fromJson(response, Marker[].class);
 
             if(markerList.length < 1){
@@ -203,7 +206,7 @@ public class MapsActivity extends FragmentActivity {
                 Double lng = Double.valueOf(info.getLongitude());
                 String title = info.getHazard();
                 String snippet = info.getReportedBy();
-                String hazard = info.getHazardID();
+                String pass = info.getReportID() + "#" + info.getHazardID() + "#" + info.getUserID();
 
                 //Toast.makeText(getApplicationContext(), "Added Marker!" + lat.toString() + ", " + lng.toString(), Toast.LENGTH_LONG).show();
 
@@ -211,36 +214,51 @@ public class MapsActivity extends FragmentActivity {
                         .title(title)
                         .snippet(snippet);
 
+                map.put(new LatLng(lat, lng), pass);
                 mMap.addMarker(marker);
 
-                final boolean[] isEditable = {false};
 
                 //on marker click
-                mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                    @Override
-                    public boolean onMarkerClick(@NonNull com.google.android.gms.maps.model.Marker marker) {
-                        Intent i = new Intent(MapsActivity.this, EditMarker.class);
-                        i.putExtra("userID", currentUserGlobal);
-                        i.putExtra("reportID", info.getReportID());
-                        i.putExtra("hazardID", hazard);
 
-                        Toast.makeText(getApplicationContext(), "Owner: " + info.getUserID(), Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getApplicationContext(), "Sent ID: " + info.getReportID(), Toast.LENGTH_SHORT).show();
-                        Toast.makeText(getApplicationContext(), "Origin Hazard ID: " + hazard, Toast.LENGTH_SHORT).show();
+            } // end of for
 
-                        if(currentUserGlobal.equals(info.getUserID())){
-                            isEditable[0] = true;
-                        }
+            mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(@NonNull com.google.android.gms.maps.model.Marker marker) {
+                    final boolean[] isEditable = {false};
+                    Intent i = new Intent(MapsActivity.this, EditMarker.class);
 
-                        i.putExtra("isEditable", isEditable[0]);
-                        startActivity(i);
+                    String receivedString = map.get(marker.getPosition());
+                    String[] outputToken = receivedString.split("#");
 
-                        return false;
+                    String reportID = outputToken[0];
+                    String hazardID = outputToken[1];
+                    String userID = outputToken[2];
+
+
+
+                    Toast.makeText(getApplicationContext(), "reportID: " + reportID +
+                            " hazardID: " + hazardID + " userID: " + userID, Toast.LENGTH_LONG).show();
+
+                    if(currentUserGlobal.equals(userID)){
+                        isEditable[0] = true;
+                        Toast.makeText(getApplicationContext(), "Perh boleh edit sia", Toast.LENGTH_LONG).show();
                     }
-                });
-            }
-        }
-    };
+
+                    i.putExtra("userID", currentUserGlobal);
+                    i.putExtra("reportID",reportID);
+                    i.putExtra("hazardID", hazardID);
+                    i.putExtra("isEditable", isEditable[0]);
+                    startActivity(i);
+                    //Toast.makeText(getApplicationContext(), "Clicked: " + map.get(marker.getPosition()), Toast.LENGTH_SHORT).show();
+
+                    return false;
+                }
+            });
+
+        }//end of onresponse
+
+    }; //end of sendrequest
 
     public Response.ErrorListener onError = new Response.ErrorListener() {
         @Override
