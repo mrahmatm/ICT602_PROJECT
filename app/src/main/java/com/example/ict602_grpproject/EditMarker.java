@@ -40,32 +40,21 @@ public class EditMarker extends AppCompatActivity {
     String checkedHazard;
 
     RequestQueue queueU, queueD;
-    final String URLUpdate = "http://www.ict602.ml/updateReports.php";
+    final String URLUpdate = "http://www.ict602.ml/updateReport.php";
     final String URLDelete = "http://www.ict602.ml/deleteReport.php";
 
     Marker[] markerList;
     Message[] messageList;
     Gson gson;
 
-    private void checkTheHazard(String input){
-        switch(input){
-            case "1": radBtn1.setChecked(true); break;
-            case "2": radBtn2.setChecked(true); break;
-            case "3": radBtn3.setChecked(true); break;
-            default: radBtn1.setChecked(true);; break;
+    private String checkRadio(View v){
+        int current = radGrp.getCheckedRadioButtonId();
+        String output = "0";
+        switch(current){
+            case R.id.radID1: output = "1"; break;
+            case R.id.radID2: output = "2"; break;
+            case R.id.radID3: output = "3"; break;
         }
-    }
-
-    private String getTheCheckedHazard(){
-        String output = "";
-        radGrp = (RadioGroup) findViewById(R.id.grpRadio);
-        switch(String.valueOf(radGrp.getCheckedRadioButtonId())){
-            case "radBtn1": output =  "1"; break;
-            case "radBtn2": output =  "1"; break;
-            case "radBtn3": output =  "1"; break;
-            default: output =  "1"; break;
-        }
-
         return output;
     }
 
@@ -79,19 +68,7 @@ public class EditMarker extends AppCompatActivity {
         radBtn2 = (RadioButton) findViewById(R.id.radID2);
         radBtn3 = (RadioButton) findViewById(R.id.radID3);
 
-        radGrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(radBtn1.isChecked()){
-                    checkedHazard = "1";
-                } else if(radBtn2.isChecked()){
-                    checkedHazard = "2";
-                } else if(radBtn3.isChecked()){
-                    checkedHazard = "3";
-                }else
-                    checkedHazard = "null";
-            }
-        });
+        //Toast.makeText(getApplicationContext(), "current radio: " + getTheCheckedHazard(), Toast.LENGTH_LONG).show();
 
         btnSubmit = (Button) findViewById(R.id.btnUpdate);
         btnDelete = (Button)findViewById(R.id.btnDelete);
@@ -105,10 +82,16 @@ public class EditMarker extends AppCompatActivity {
         String targetReport = extras.getString("reportID");
         String defaultHazard = extras.getString("hazardID");
 
+        switch(defaultHazard){
+            case "1" : radBtn1.performClick(); break;
+            case "2" : radBtn2.performClick(); break;
+            case "3" : radBtn3.performClick(); break;
+        }
+
         //Toast.makeText(getApplicationContext(), "reportID: " + targetReport +
          //       " hazardID: " + defaultHazard + " edit: " + isEditable, Toast.LENGTH_LONG).show();
         //Toast.makeText(getApplicationContext(), "you're in onc create!", Toast.LENGTH_SHORT).show();
-        checkTheHazard(defaultHazard);
+        //checkTheHazard(defaultHazard);
 
         //Toast.makeText(getApplicationContext(), "sent default hazard: " + defaultHazard, Toast.LENGTH_LONG).show();
 
@@ -116,7 +99,9 @@ public class EditMarker extends AppCompatActivity {
             btnSubmit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    sendUpdateRequest(targetReport);
+
+                    String selected = checkRadio(v);
+                    sendUpdateRequest(targetReport, selected);
                 }
             });
 
@@ -132,7 +117,7 @@ public class EditMarker extends AppCompatActivity {
 
     }
 
-    public void sendUpdateRequest(String reportID) {
+    public void sendUpdateRequest(String reportID, String input) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URLUpdate, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -144,7 +129,7 @@ public class EditMarker extends AppCompatActivity {
                 //POST key and values
                 Map<String, String> params = new HashMap<>();
                 params.put("reportID", reportID);
-                params.put("hazardID", getTheCheckedHazard());
+                params.put("hazardID", input);
 
                 return params;
             }

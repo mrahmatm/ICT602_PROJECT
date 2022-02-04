@@ -2,11 +2,16 @@ package com.example.ict602_grpproject;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +30,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -52,6 +59,9 @@ public class MapsActivity extends FragmentActivity {
     MarkerOptions marker;
     Vector<MarkerOptions> markerOptions;
     private GoogleMap mMap;
+    private GoogleMap cMap;
+
+    HashMap<LatLng, String> map = new HashMap<LatLng, String>();
 
     String currentUserGlobal;
 
@@ -147,15 +157,23 @@ public class MapsActivity extends FragmentActivity {
                         public void onMapReady(GoogleMap googleMap) {
 
                             mMap = googleMap;
-
+                            cMap = googleMap;
                             //Initialize Lat Lng
                             LatLng latLng = new LatLng(location.getLatitude(),
                                     location.getLongitude());
                             //Create marker options
-                            MarkerOptions options = new MarkerOptions().position(latLng).title("I am here");
+                            MarkerOptions options = new MarkerOptions()
+                                    .position(latLng)
+                                    .title("You are Here")
+                                    .snippet("Your location")
+                                    .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_userlocation));
+
                             //zoom map scale 15
-                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-                            googleMap.addMarker(options);
+                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12));
+                            String pass = null;
+                            map.put(new LatLng(location.getLatitude(), location.getLongitude()), pass);
+                            mMap.addMarker(options);
+                            //Toast.makeText(getApplicationContext(), "self marker: " + mMap.get(Marker.get), Toast.LENGTH_LONG).show();
                             /*
                             for(MarkerOptions mark: markerOptions){
                                 mMap.addMarker(mark);
@@ -193,7 +211,7 @@ public class MapsActivity extends FragmentActivity {
     public Response. Listener<String> onSuccess = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
-            HashMap<LatLng, String> map = new HashMap<LatLng, String>();
+
             markerList = gson.fromJson(response, Marker[].class);
 
             if(markerList.length < 1){
@@ -208,52 +226,57 @@ public class MapsActivity extends FragmentActivity {
                 String snippet = info.getReportedBy();
                 String pass = info.getReportID() + "#" + info.getHazardID() + "#" + info.getUserID();
 
-                //Toast.makeText(getApplicationContext(), "Added Marker!" + lat.toString() + ", " + lng.toString(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "Snippet: " + snippet, Toast.LENGTH_LONG).show();
 
-                MarkerOptions marker= new MarkerOptions().position(new LatLng(lat,lng))
+                MarkerOptions marker= new MarkerOptions()
+                        .position(new LatLng(lat,lng))
                         .title(title)
-                        .snippet(snippet);
+                        .snippet(snippet)
+                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_hazardicon));
 
                 map.put(new LatLng(lat, lng), pass);
                 mMap.addMarker(marker);
-
-
-                //on marker click
+                //Toast.makeText(getApplicationContext(), "marker: " + map.get(marker.getPosition()), Toast.LENGTH_LONG).show();
 
             } // end of for
 
             mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                 @Override
                 public boolean onMarkerClick(@NonNull com.google.android.gms.maps.model.Marker marker) {
-                    final boolean[] isEditable = {false};
-                    Intent i = new Intent(MapsActivity.this, EditMarker.class);
 
-                    String receivedString = map.get(marker.getPosition());
-                    String[] outputToken = receivedString.split("#");
+                    //only intent if the marker is from DB (doesn't intent with currentLocation markers)
+                    if(map.get(marker.getPosition()).contains("#")){
 
-                    String reportID = outputToken[0];
-                    String hazardID = outputToken[1];
-                    String userID = outputToken[2];
+                        final boolean[] isEditable = {false};
+                        Intent i = new Intent(MapsActivity.this, EditMarker.class);
+                        String receivedString = map.get(marker.getPosition());
+                        String[] outputToken = receivedString.split("#");
 
+                        String reportID = outputToken[0];
+                        String hazardID = outputToken[1];
+                        String userID = outputToken[2];
 
+                        //Toast.makeText(getApplicationContext(), "reportID: " + reportID +
+                        //       " hazardID: " + hazardID + " userID: " + userID, Toast.LENGTH_LONG).show();
 
-                    //Toast.makeText(getApplicationContext(), "reportID: " + reportID +
-                     //       " hazardID: " + hazardID + " userID: " + userID, Toast.LENGTH_LONG).show();
+                        if(currentUserGlobal.equals(userID)){
+                            isEditable[0] = true;
+                            Toast.makeText(getApplicationContext(), "Perh boleh edit sia", Toast.LENGTH_LONG).show();
+                        }
 
-                    if(currentUserGlobal.equals(userID)){
-                        isEditable[0] = true;
-                        Toast.makeText(getApplicationContext(), "Perh boleh edit sia", Toast.LENGTH_LONG).show();
+                        i.putExtra("userID", currentUserGlobal);
+                        i.putExtra("reportID",reportID);
+                        i.putExtra("hazardID", hazardID);
+                        i.putExtra("isEditable", isEditable[0]);
+                        //finish();
+                        startActivity(i);
+                        Toast.makeText(getApplicationContext(), "Clicked: on custom marker!", Toast.LENGTH_SHORT).show();
+                        return false;
+                    }else{
+                        Toast.makeText(getApplicationContext(), "This is you!", Toast.LENGTH_SHORT).show();
+                        return true;
                     }
 
-                    i.putExtra("userID", currentUserGlobal);
-                    i.putExtra("reportID",reportID);
-                    i.putExtra("hazardID", hazardID);
-                    i.putExtra("isEditable", isEditable[0]);
-                    //finish();
-                    startActivity(i);
-                    //Toast.makeText(getApplicationContext(), "Clicked: " + map.get(marker.getPosition()), Toast.LENGTH_SHORT).show();
-
-                    return false;
                 }
             });
 
@@ -267,5 +290,15 @@ public class MapsActivity extends FragmentActivity {
             Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
         }
     };
+
+    private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectoriID){
+        Drawable vectorDrawable  = ContextCompat.getDrawable(context, vectoriID);
+        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+        Bitmap bitmap=Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
 
 }
