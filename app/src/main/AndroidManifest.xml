@@ -26,8 +26,11 @@
             android:name=".AboutPage"
             android:exported="false" />
         <activity
+            android:name=".LoginPage"
+            android:exported="false"/>
+        <activity
             android:name=".AddMarker"
-            android:exported="false" />
+            android:exported="false"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

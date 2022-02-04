@@ -13,35 +13,19 @@
         android:fontFamily="sans-serif"
         android:text="Welcome to Map Marker"
         android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/FirstPage_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toTopOf="@+id/FirstPage_button"/>
 
     <Button
         android:id="@+id/FirstPage_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login (User)"
+        android:text="Login"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toTopOf="@+id/FirstPage_button2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FirstPage_textView" />
-
-    <Button
-        android:id="@+id/FirstPage_button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login (Admin)"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toTopOf="@+id/FirstPage_button3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FirstPage_button" />
+        app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/FirstPage_textView"
+        app:layout_constraintBottom_toTopOf="@+id/FirstPage_button3"/>
 
     <Button
         android:id="@+id/FirstPage_button3"
@@ -49,11 +33,9 @@
         android:layout_height="wrap_content"
         android:text="Sign Up"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FirstPage_button2" />
+        app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/FirstPage_button"
+        app:layout_constraintBottom_toTopOf="@+id/btnTest"/>
 
     <Button
         android:id="@+id/btnTest"
@@ -61,11 +43,10 @@
         android:layout_height="wrap_content"
         android:text="TEST"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/FirstPage_button3" />
+        app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/FirstPage_button3"/>
+
 
     <Button
         android:id="@+id/btnAbout"
