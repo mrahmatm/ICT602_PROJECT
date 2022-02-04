@@ -33,8 +33,8 @@ public class AddMarker extends AppCompatActivity {
 
     Button btnSubmit;
     EditText name, type, desc;
-    RequestQueue queue;
 
+    RequestQueue queue;
     final String URL = "http://www.ict602.ml/insertReport.php";
 
     RadioGroup radGrp;
@@ -126,7 +126,7 @@ public class AddMarker extends AppCompatActivity {
         };
 
         queue.add(stringRequest);
-        Toast.makeText(getApplicationContext(),
+        /* Toast.makeText(getApplicationContext(),
                 "Hazard Reported!, Coor: " + String.valueOf(currentLocation.getLatitude()) + ", " +
                         String.valueOf(currentLocation.getLongitude())
                 , Toast.LENGTH_LONG).show();
@@ -138,7 +138,7 @@ public class AddMarker extends AppCompatActivity {
                 , Toast.LENGTH_LONG).show();
         Toast.makeText(getApplicationContext(),
                 "\nHazard Reported!, userid: " + userID
-                , Toast.LENGTH_LONG).show();
+                , Toast.LENGTH_LONG).show(); */
 
     }
 

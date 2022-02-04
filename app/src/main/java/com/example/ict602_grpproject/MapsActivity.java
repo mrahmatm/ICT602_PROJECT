@@ -237,8 +237,8 @@ public class MapsActivity extends FragmentActivity {
 
 
 
-                    Toast.makeText(getApplicationContext(), "reportID: " + reportID +
-                            " hazardID: " + hazardID + " userID: " + userID, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "reportID: " + reportID +
+                     //       " hazardID: " + hazardID + " userID: " + userID, Toast.LENGTH_LONG).show();
 
                     if(currentUserGlobal.equals(userID)){
                         isEditable[0] = true;
@@ -249,6 +249,7 @@ public class MapsActivity extends FragmentActivity {
                     i.putExtra("reportID",reportID);
                     i.putExtra("hazardID", hazardID);
                     i.putExtra("isEditable", isEditable[0]);
+                    //finish();
                     startActivity(i);
                     //Toast.makeText(getApplicationContext(), "Clicked: " + map.get(marker.getPosition()), Toast.LENGTH_SHORT).show();
 

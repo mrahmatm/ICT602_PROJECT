@@ -33,21 +33,41 @@ import java.util.Map;
 public class EditMarker extends AppCompatActivity {
 
     Button btnSubmit, btnDelete;
-
     RadioGroup radGrp;
     RadioButton radBtn1, radBtn2, radBtn3;
-
     TextView preview;
 
     String checkedHazard;
 
-    RequestQueue queue;
-    final String URLUpdate = "http://www.ict602.ml/getReports.php";
+    RequestQueue queueU, queueD;
+    final String URLUpdate = "http://www.ict602.ml/updateReports.php";
     final String URLDelete = "http://www.ict602.ml/deleteReport.php";
 
     Marker[] markerList;
     Message[] messageList;
     Gson gson;
+
+    private void checkTheHazard(String input){
+        switch(input){
+            case "1": radBtn1.setChecked(true); break;
+            case "2": radBtn2.setChecked(true); break;
+            case "3": radBtn3.setChecked(true); break;
+            default: radBtn1.setChecked(true);; break;
+        }
+    }
+
+    private String getTheCheckedHazard(){
+        String output = "";
+        radGrp = (RadioGroup) findViewById(R.id.grpRadio);
+        switch(String.valueOf(radGrp.getCheckedRadioButtonId())){
+            case "radBtn1": output =  "1"; break;
+            case "radBtn2": output =  "1"; break;
+            case "radBtn3": output =  "1"; break;
+            default: output =  "1"; break;
+        }
+
+        return output;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,17 +82,14 @@ public class EditMarker extends AppCompatActivity {
         radGrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId){
-                    case R.id.radID1:
-                        checkedHazard = "1";
-                        break;
-                    case R.id.radID2:
-                        checkedHazard = "2";
-                        break;
-                    case R.id.radID3:
-                        checkedHazard = "3";
-                        break;
-                }
+                if(radBtn1.isChecked()){
+                    checkedHazard = "1";
+                } else if(radBtn2.isChecked()){
+                    checkedHazard = "2";
+                } else if(radBtn3.isChecked()){
+                    checkedHazard = "3";
+                }else
+                    checkedHazard = "null";
             }
         });
 
@@ -80,34 +97,22 @@ public class EditMarker extends AppCompatActivity {
         btnDelete = (Button)findViewById(R.id.btnDelete);
 
         gson = new GsonBuilder().create();
-
+        queueU = Volley.newRequestQueue(getApplicationContext());
+        queueD = Volley.newRequestQueue(getApplicationContext());
         //data passing
         Bundle extras = getIntent().getExtras();
         boolean isEditable = extras.getBoolean("isEditable");
         String targetReport = extras.getString("reportID");
         String defaultHazard = extras.getString("hazardID");
 
-        //preview.findViewById(R.id.txtPreviewID);
-        /*
+        //Toast.makeText(getApplicationContext(), "reportID: " + targetReport +
+         //       " hazardID: " + defaultHazard + " edit: " + isEditable, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), "you're in onc create!", Toast.LENGTH_SHORT).show();
+        checkTheHazard(defaultHazard);
 
-        i.putExtra("userID", currentUserGlobal);
-                    i.putExtra("reportID",reportID);
-                    i.putExtra("hazardID", hazardID);
-                    i.putExtra("isEditable", isEditable[0]);
+        //Toast.makeText(getApplicationContext(), "sent default hazard: " + defaultHazard, Toast.LENGTH_LONG).show();
 
-         */
-
-        //preview.setText("Hazard ID: " + defaultHazard.toString());
-
-        Toast.makeText(getApplicationContext(), "sent default hazard: " + defaultHazard, Toast.LENGTH_LONG).show();
-
-        switch (defaultHazard){
-            case "1": radBtn1.performClick();
-            case "2": radBtn2.performClick();
-            case "3": radBtn3.performClick();
-        }
-
-        if(isEditable){
+        //if(isEditable){
             btnSubmit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -121,17 +126,9 @@ public class EditMarker extends AppCompatActivity {
                     sendDeleteRequest(targetReport);
                 }
             });
-        }else{
-           Toast.makeText(getApplicationContext(), "Eh kau xleh edit anat", Toast.LENGTH_SHORT).show();
-        }
-
-
-
-        //Marker newMarker = new Marker(currentLocation, hazardName, hazardType, hazardDesc, dummyID, dummyTime);
-
-        //hold jap, buat read dulu
-
-
+       // }else{
+        //   Toast.makeText(getApplicationContext(), "Eh kau xleh edit anat", Toast.LENGTH_SHORT).show();
+       // }
 
     }
 
@@ -147,38 +144,21 @@ public class EditMarker extends AppCompatActivity {
                 //POST key and values
                 Map<String, String> params = new HashMap<>();
                 params.put("reportID", reportID);
-
-                String checkedHazard;
-
-                switch (radGrp.getCheckedRadioButtonId()){
-                    case R.id.radID1: checkedHazard = "1";
-                    case R.id.radID2: checkedHazard = "2";
-                    case R.id.radID3: checkedHazard = "3";
-                        break;
-                    default:
-                        checkedHazard= "0";
-                }
-
-                params.put("hazardID", checkedHazard);
+                params.put("hazardID", getTheCheckedHazard());
 
                 return params;
             }
         };
 
-        queue.add(stringRequest);
-
+        queueU.add(stringRequest);
+        Toast.makeText(getApplicationContext(), "You're in the sendupdate!", Toast.LENGTH_SHORT).show();
     }
 
     public void sendDeleteRequest(String reportID) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLUpdate, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URLDelete, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                //messageList = gson.fromJson(response, Message[].class);
 
-               // for(Message msg: messageList){
-                 //   String current = msg.getMsg();
-                 //   Toast.makeText(getApplicationContext(), current, Toast.LENGTH_LONG).show();
-                //}
             }
         }, errorListener) {
             @Override
@@ -191,8 +171,8 @@ public class EditMarker extends AppCompatActivity {
             }
         };
 
-        queue.add(stringRequest);
-        //Toast.makeText(getApplicationContext(), "Target: " + reportID + "New: " + checkedHazard, Toast.LENGTH_LONG).show();
+        queueD.add(stringRequest);
+        Toast.makeText(getApplicationContext(), "You're in the sendDelete!", Toast.LENGTH_SHORT).show();
     }
 
         public Response.ErrorListener errorListener = new Response.ErrorListener() {
