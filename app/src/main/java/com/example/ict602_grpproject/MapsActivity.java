@@ -6,7 +6,9 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
@@ -131,9 +133,29 @@ public class MapsActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 //actions bila user log out
-                localDB = dataHelper.getWritableDatabase();
-                localDB.execSQL("delete from login;");
-                finish();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
+                builder.setCancelable(true);
+                builder.setTitle("Log Out");
+                builder.setMessage("Would you like to log out?");
+                builder.setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                localDB = dataHelper.getWritableDatabase();
+                                localDB.execSQL("delete from login;");
+                                finish();
+                            }
+                        });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing bitch
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
 
