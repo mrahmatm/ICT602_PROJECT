@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,6 +21,9 @@ import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -53,6 +57,8 @@ public class MapsActivity extends FragmentActivity {
     //initialize variable
     SupportMapFragment supportMapFragment;
     FusedLocationProviderClient client;
+
+    FloatingActionButton btnTest;
 
     Location currentLocation;
 
@@ -114,8 +120,6 @@ public class MapsActivity extends FragmentActivity {
 
         btnAdd = (FloatingActionButton) findViewById(R.id.btnAdd);
         btnLogOut = (FloatingActionButton) findViewById(R.id.btnLogOut);
-
-
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -256,7 +260,8 @@ public class MapsActivity extends FragmentActivity {
                 Double lng = Double.valueOf(info.getLongitude());
                 String title = info.getHazard();
                 String snippet = "Reported " + info.getTime() + " by " + info.getReportedBy();
-                String pass = info.getReportID() + "#" + info.getHazardID() + "#" + info.getUserID();
+                String pass = info.getReportID() + "#" + info.getHazardID() + "#" + info.getUserID()
+                        + "#" + info.getReportedBy() + "#" + info.getTime();
 
                 //Toast.makeText(getApplicationContext(), "Snippet: " + snippet, Toast.LENGTH_LONG).show();
 
@@ -316,6 +321,13 @@ public class MapsActivity extends FragmentActivity {
                             i.putExtra("isEditable", isEditable[0]);
                             //finish();
                             startActivity(i);
+                        }else{
+                            String popupHazard = outputToken[1];
+                            String popupUser = outputToken[3];
+                            String popupTime = outputToken[4];
+
+                            showPopup(popupHazard, popupUser, popupTime);
+                            return true;
                         }
 
 
@@ -349,5 +361,49 @@ public class MapsActivity extends FragmentActivity {
         vectorDrawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
+
+    private void showPopup(String hazard, String user, String time){
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.map_popup);
+
+        TextView title, username, datetime;
+        Button btnClose;
+
+        title = (TextView) findViewById(R.id.txtHazardName);
+        username = (TextView)findViewById(R.id.txtUsername);
+        datetime = (TextView) findViewById(R.id.txtDateTime);
+        btnClose = (Button)findViewById(R.id.btnOkay);
+
+        ImageView icon = (ImageView)findViewById(R.id.imgIcon1);
+
+        switch (hazard){
+            case "1" :
+                title.setText("Road Obstruction");
+                icon.setImageResource(R.drawable.h1_roadobstruction);
+                break;
+            case "2" : title.setText("Slippery Road");
+                icon.setImageResource(R.drawable.h2_slipperyroad);
+                break;
+            case "3" : title.setText("Dangerous Pothol");
+                icon.setImageResource(R.drawable.h3_pothole);
+                break;
+            case "4" : title.setText("Accident");
+                icon.setImageResource(R.drawable.h4_trafficaccident);
+                break;
+        }
+
+        username.setText("Reported By: " + user);
+        datetime.setText("Timestamp: " + time);
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
 
 }

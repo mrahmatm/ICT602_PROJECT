@@ -11,7 +11,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="18dp"
         android:id="@+id/imgIcon1"
-        android:src="@drawable/hazard"/>
+        android:src="@drawable/h3_pothole"/>
 
     <TextView
         android:layout_width="wrap_content"
