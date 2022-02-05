@@ -302,7 +302,9 @@ public class MapsActivity extends FragmentActivity {
                         //Toast.makeText(getApplicationContext(), "reportID: " + reportID +
                         //       " hazardID: " + hazardID + " userID: " + userID, Toast.LENGTH_LONG).show();
 
-                        if(currentUserGlobal.equals(userID)  || userTypeGlobal.equals("1")){
+                        Toast.makeText(getApplicationContext(), "Your autho: " + userTypeGlobal, Toast.LENGTH_SHORT).show();
+
+                        if(currentUserGlobal.equals(userID)  || userTypeGlobal.equals("Admin") || userTypeGlobal.equals("1")){
                             isEditable[0] = true;
                             Toast.makeText(getApplicationContext(), "Perh boleh edit sia", Toast.LENGTH_LONG).show();
                             i.putExtra("currentLocation", currentLocation);
