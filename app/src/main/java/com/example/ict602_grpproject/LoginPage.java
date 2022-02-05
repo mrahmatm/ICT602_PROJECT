@@ -160,10 +160,15 @@ public class LoginPage extends AppCompatActivity {
                             //Peasant
                             Toast.makeText(getApplicationContext(), "Welcome, " + loggedUsername, Toast.LENGTH_LONG).show();
                             Intent map = new Intent(LoginPage.this, MapsActivity.class);
+
+                            //upon intent, steal the damn data
+                            map.putExtra("userID", userID);
+                            map.putExtra("userType", userType);
+
                             startActivity(map);
                         }
                         else {
-                            Toast.makeText(getApplicationContext(), "who you", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "who you. sign up la aiyo", Toast.LENGTH_LONG).show();
                         }
                     }
                     else {

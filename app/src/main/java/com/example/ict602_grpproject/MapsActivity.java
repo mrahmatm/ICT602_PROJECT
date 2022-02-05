@@ -9,6 +9,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
@@ -62,9 +63,12 @@ public class MapsActivity extends FragmentActivity {
     private GoogleMap mMap;
     private GoogleMap cMap;
 
+    SQLiteDatabase localDB;
+    LocalDB dataHelper;
+
     HashMap<LatLng, String> map = new HashMap<LatLng, String>();
 
-    String currentUserGlobal;
+    String currentUserGlobal,userTypeGlobal;
 
     FloatingActionButton btnOpen, btnAdd, btnLogOut;
 
@@ -99,11 +103,10 @@ public class MapsActivity extends FragmentActivity {
         //if so, set all the edittext's and textview's based on values retrieved
         //Location currentLocation = extras.getParcelable("currentLocation");
         //if log in succressful, pass user id through intent ni
-        //String userID = extras.getString("userID");
-
         //for now, dummy
-        String userID = "6";
+        String userID = extras.getString("userID");
         currentUserGlobal = userID;
+        userTypeGlobal = extras.getString("userType");
         //String finalUserID = userID;
 
         btnAdd = (FloatingActionButton) findViewById(R.id.btnAdd);
@@ -128,6 +131,9 @@ public class MapsActivity extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 //actions bila user log out
+                localDB = dataHelper.getWritableDatabase();
+                localDB.execSQL("delete from login;");
+                finish();
             }
         });
 
@@ -274,18 +280,19 @@ public class MapsActivity extends FragmentActivity {
                         //Toast.makeText(getApplicationContext(), "reportID: " + reportID +
                         //       " hazardID: " + hazardID + " userID: " + userID, Toast.LENGTH_LONG).show();
 
-                        if(currentUserGlobal.equals(userID)){
+                        if(currentUserGlobal.equals(userID)  || userTypeGlobal.equals("1")){
                             isEditable[0] = true;
                             Toast.makeText(getApplicationContext(), "Perh boleh edit sia", Toast.LENGTH_LONG).show();
+                            i.putExtra("currentLocation", currentLocation);
+                            i.putExtra("userID", currentUserGlobal);
+                            i.putExtra("reportID",reportID);
+                            i.putExtra("hazardID", hazardID);
+                            i.putExtra("isEditable", isEditable[0]);
+                            //finish();
+                            startActivity(i);
                         }
 
-                        i.putExtra("currentLocation", currentLocation);
-                        i.putExtra("userID", currentUserGlobal);
-                        i.putExtra("reportID",reportID);
-                        i.putExtra("hazardID", hazardID);
-                        i.putExtra("isEditable", isEditable[0]);
-                        //finish();
-                        startActivity(i);
+
                         //Toast.makeText(getApplicationContext(), "Clicked: on custom marker!", Toast.LENGTH_SHORT).show();
                         return false;
                     }else{
