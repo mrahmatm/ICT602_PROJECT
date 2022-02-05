@@ -148,6 +148,9 @@ public class AddMarker extends AppCompatActivity implements OnMapReadyCallback {
 
                 //hold jap, buat read dulu
                 makeRequest(currentLocation, checkedHazard, userID, currentDateandTime);
+
+                Intent i = new Intent(AddMarker.this, MapsActivity.class);
+                startActivity(i);
             }
         });
     }

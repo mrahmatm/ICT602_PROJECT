@@ -1,5 +1,6 @@
 package com.example.ict602_grpproject;
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
@@ -105,14 +106,18 @@ public class EditMarker extends AppCompatActivity {
 
                     String selected = checkRadio(v);
                     sendUpdateRequest(targetReport, selected);
-                    finish();
+                    Intent i = new Intent(EditMarker.this, MapsActivity.class);
+                    startActivity(i);
                 }
             });
 
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     sendDeleteRequest(targetReport);
+                    Intent i = new Intent(EditMarker.this, MapsActivity.class);
+                    startActivity(i);
                 }
             });
        // }else{
