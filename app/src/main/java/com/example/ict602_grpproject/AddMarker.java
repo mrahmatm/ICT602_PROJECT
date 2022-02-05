@@ -126,7 +126,8 @@ public class AddMarker extends AppCompatActivity implements OnMapReadyCallback {
         globalUseLocation = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
         String userID = extras.getString("userID");
         //remark: nanti pass user type sekali
-        String userType = "2";
+        String userType = extras.getString("userType");
+        //String userType = "2";
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -150,6 +151,8 @@ public class AddMarker extends AppCompatActivity implements OnMapReadyCallback {
                 makeRequest(currentLocation, checkedHazard, userID, currentDateandTime);
 
                 Intent i = new Intent(AddMarker.this, MapsActivity.class);
+                i.putExtra("userID", userID);
+                i.putExtra("userType", userType);
                 startActivity(i);
             }
         });

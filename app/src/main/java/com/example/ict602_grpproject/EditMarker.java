@@ -84,6 +84,8 @@ public class EditMarker extends AppCompatActivity {
         boolean isEditable = extras.getBoolean("isEditable");
         String targetReport = extras.getString("reportID");
         String defaultHazard = extras.getString("hazardID");
+        String userID = extras.getString("userID");
+        String userType = extras.getString("userType");
 
         switch(defaultHazard){
             case "1" : radBtn1.performClick(); break;
@@ -107,6 +109,8 @@ public class EditMarker extends AppCompatActivity {
                     String selected = checkRadio(v);
                     sendUpdateRequest(targetReport, selected);
                     Intent i = new Intent(EditMarker.this, MapsActivity.class);
+                    i.putExtra("userID", userID);
+                    i.putExtra("userType", userType);
                     startActivity(i);
                 }
             });
@@ -117,6 +121,8 @@ public class EditMarker extends AppCompatActivity {
 
                     sendDeleteRequest(targetReport);
                     Intent i = new Intent(EditMarker.this, MapsActivity.class);
+                    i.putExtra("userID", userID);
+                    i.putExtra("userType", userType);
                     startActivity(i);
                 }
             });

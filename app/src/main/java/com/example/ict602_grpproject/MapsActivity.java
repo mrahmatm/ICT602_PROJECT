@@ -108,6 +108,7 @@ public class MapsActivity extends FragmentActivity {
         //for now, dummy
         String userID = extras.getString("userID");
         currentUserGlobal = userID;
+        Toast.makeText(getApplicationContext(), "Your id: " + currentUserGlobal, Toast.LENGTH_LONG).show();
         userTypeGlobal = extras.getString("userType");
         //String finalUserID = userID;
 
@@ -309,6 +310,7 @@ public class MapsActivity extends FragmentActivity {
                             Toast.makeText(getApplicationContext(), "Perh boleh edit sia", Toast.LENGTH_LONG).show();
                             i.putExtra("currentLocation", currentLocation);
                             i.putExtra("userID", currentUserGlobal);
+                            i.putExtra("userType", userTypeGlobal);
                             i.putExtra("reportID",reportID);
                             i.putExtra("hazardID", hazardID);
                             i.putExtra("isEditable", isEditable[0]);
