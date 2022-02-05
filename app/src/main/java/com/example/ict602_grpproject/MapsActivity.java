@@ -54,6 +54,8 @@ import java.util.Vector;
 
 public class MapsActivity extends FragmentActivity {
 
+    TextView Ptitle, Pusername, Pdatetime; Button PbtnClose;
+
     //initialize variable
     SupportMapFragment supportMapFragment;
     FusedLocationProviderClient client;
@@ -133,6 +135,8 @@ public class MapsActivity extends FragmentActivity {
 
             }
         });
+
+        dataHelper = new LocalDB(this);
 
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -363,39 +367,39 @@ public class MapsActivity extends FragmentActivity {
     }
 
     private void showPopup(String hazard, String user, String time){
-        Dialog dialog = new Dialog(this);
+        Dialog dialog = new Dialog(this, R.style.DialogStyle);
         dialog.setContentView(R.layout.map_popup);
 
-        TextView title, username, datetime;
-        Button btnClose;
+        Ptitle      = (TextView)dialog.findViewById(R.id.txtTitle11);
+        Pusername   = (TextView)dialog.findViewById(R.id.txtUsername);
+        Pdatetime   = (TextView)dialog.findViewById(R.id.txtDateTime);
+        PbtnClose   = (Button)dialog.findViewById(R.id.btnOkay);
 
-        title = (TextView) findViewById(R.id.txtHazardName);
-        username = (TextView)findViewById(R.id.txtUsername);
-        datetime = (TextView) findViewById(R.id.txtDateTime);
-        btnClose = (Button)findViewById(R.id.btnOkay);
-
-        ImageView icon = (ImageView)findViewById(R.id.imgIcon1);
+        ImageView icon = (ImageView)dialog.findViewById(R.id.imgIcon1);
 
         switch (hazard){
             case "1" :
-                title.setText("Road Obstruction");
+                Ptitle.setText("Road Obstruction");
                 icon.setImageResource(R.drawable.h1_roadobstruction);
                 break;
-            case "2" : title.setText("Slippery Road");
+            case "2" :
+                Ptitle.setText("Slippery Road");
                 icon.setImageResource(R.drawable.h2_slipperyroad);
                 break;
-            case "3" : title.setText("Dangerous Pothol");
+            case "3" :
+                Ptitle.setText("Dangerous Pothol");
                 icon.setImageResource(R.drawable.h3_pothole);
                 break;
-            case "4" : title.setText("Accident");
+            case "4" :
+                Ptitle.setText("Accident");
                 icon.setImageResource(R.drawable.h4_trafficaccident);
                 break;
         }
 
-        username.setText("Reported By: " + user);
-        datetime.setText("Timestamp: " + time);
+        Pusername.setText("Reported By: " + user);
+        Pdatetime.setText("Timestamp: \n" + time);
 
-        btnClose.setOnClickListener(new View.OnClickListener() {
+        PbtnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();

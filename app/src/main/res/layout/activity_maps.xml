@@ -38,16 +38,5 @@
         map:layout_constraintBottom_toTopOf="@+id/btnAdd"
         map:layout_constraintEnd_toEndOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnTest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="17dp"
-        android:clickable="true"
-        android:src="@drawable/ic_baseline_exit_to_app_24"
-        map:layout_constraintBottom_toTopOf="@+id/btnLogOut"
-        map:layout_constraintEnd_toEndOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 
