@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
@@ -219,11 +220,13 @@ public class MapsActivity extends FragmentActivity {
                 return;
             }
 
+            BitmapDrawable bitmapDrawable;
+
             for(Marker info: markerList){
-                Double lat= Double.valueOf(info.getLatitude());
+                Double lat = Double.valueOf(info.getLatitude());
                 Double lng = Double.valueOf(info.getLongitude());
                 String title = info.getHazard();
-                String snippet = info.getReportedBy();
+                String snippet = "Reported " + info.getTime() + " by " + info.getReportedBy();
                 String pass = info.getReportID() + "#" + info.getHazardID() + "#" + info.getUserID();
 
                 //Toast.makeText(getApplicationContext(), "Snippet: " + snippet, Toast.LENGTH_LONG).show();
@@ -231,8 +234,20 @@ public class MapsActivity extends FragmentActivity {
                 MarkerOptions marker= new MarkerOptions()
                         .position(new LatLng(lat,lng))
                         .title(title)
-                        .snippet(snippet)
-                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_hazardicon));
+                        .snippet(snippet);
+                //.icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_hazardicon));
+
+                if(marker.getTitle().equals("Road Obstruction")){
+                    bitmapDrawable = (BitmapDrawable)getResources().getDrawable(R.drawable.h1_roadobstruction);
+                }else if(marker.getTitle().equals("Slippery Road")){
+                    bitmapDrawable = (BitmapDrawable)getResources().getDrawable(R.drawable.h2_slipperyroad);
+                }else if(marker.getTitle().equals("Dangerous Pothole")){
+                    bitmapDrawable = (BitmapDrawable)getResources().getDrawable(R.drawable.h3_pothole);
+                }else{
+                    bitmapDrawable = (BitmapDrawable)getResources().getDrawable(R.drawable.h4_trafficaccident);
+                }
+                Bitmap smallMarker = Bitmap.createScaledBitmap(bitmapDrawable.getBitmap(), 150, 150, false);
+                marker.icon(BitmapDescriptorFactory.fromBitmap(smallMarker));
 
                 map.put(new LatLng(lat, lng), pass);
                 mMap.addMarker(marker);
@@ -245,7 +260,7 @@ public class MapsActivity extends FragmentActivity {
                 public boolean onMarkerClick(@NonNull com.google.android.gms.maps.model.Marker marker) {
 
                     //only intent if the marker is from DB (doesn't intent with currentLocation markers)
-                    if(map.get(marker.getPosition()).contains("#")){
+                    if(!(map.get(marker.getPosition()) == null)){
 
                         final boolean[] isEditable = {false};
                         Intent i = new Intent(MapsActivity.this, EditMarker.class);

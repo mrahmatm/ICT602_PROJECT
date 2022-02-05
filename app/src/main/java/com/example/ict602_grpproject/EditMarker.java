@@ -34,7 +34,7 @@ public class EditMarker extends AppCompatActivity {
 
     Button btnSubmit, btnDelete;
     RadioGroup radGrp;
-    RadioButton radBtn1, radBtn2, radBtn3;
+    RadioButton radBtn1, radBtn2, radBtn3, radBtn4;
     TextView preview;
 
     String checkedHazard;
@@ -54,6 +54,7 @@ public class EditMarker extends AppCompatActivity {
             case R.id.radID1: output = "1"; break;
             case R.id.radID2: output = "2"; break;
             case R.id.radID3: output = "3"; break;
+            case R.id.radID4: output = "4"; break;
         }
         return output;
     }
@@ -67,6 +68,7 @@ public class EditMarker extends AppCompatActivity {
         radBtn1 = (RadioButton) findViewById(R.id.radID1);
         radBtn2 = (RadioButton) findViewById(R.id.radID2);
         radBtn3 = (RadioButton) findViewById(R.id.radID3);
+        radBtn4 = (RadioButton) findViewById(R.id.radID4);
 
         //Toast.makeText(getApplicationContext(), "current radio: " + getTheCheckedHazard(), Toast.LENGTH_LONG).show();
 
@@ -86,6 +88,7 @@ public class EditMarker extends AppCompatActivity {
             case "1" : radBtn1.performClick(); break;
             case "2" : radBtn2.performClick(); break;
             case "3" : radBtn3.performClick(); break;
+            case "4" : radBtn4.performClick(); break;
         }
 
         //Toast.makeText(getApplicationContext(), "reportID: " + targetReport +
@@ -159,6 +162,7 @@ public class EditMarker extends AppCompatActivity {
 
         queueD.add(stringRequest);
         Toast.makeText(getApplicationContext(), "Hazard Deleted!", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
         public Response.ErrorListener errorListener = new Response.ErrorListener() {

@@ -59,7 +59,7 @@ public class AddMarker extends AppCompatActivity implements OnMapReadyCallback {
     final String URL = "http://www.ict602.ml/insertReport.php";
 
     RadioGroup radGrp;
-    RadioButton radBtn1, radBtn2, radBtn3;
+    RadioButton radBtn1, radBtn2, radBtn3, radBtn4;
     String checkedHazard = "1";
 
     MapView mMapView;
@@ -91,6 +91,7 @@ public class AddMarker extends AppCompatActivity implements OnMapReadyCallback {
         radBtn1 = (RadioButton) findViewById(R.id.radID1);
         radBtn2 = (RadioButton) findViewById(R.id.radID2);
         radBtn3 = (RadioButton) findViewById(R.id.radID3);
+        radBtn4 = (RadioButton) findViewById(R.id.radID4);
 
         radGrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -104,6 +105,9 @@ public class AddMarker extends AppCompatActivity implements OnMapReadyCallback {
                         break;
                     case R.id.radID3:
                         checkedHazard = "3";
+                        break;
+                    case R.id.radID4:
+                        checkedHazard = "4";
                         break;
                 }
             }
@@ -263,6 +267,7 @@ public class AddMarker extends AppCompatActivity implements OnMapReadyCallback {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                googleMap.clear(); // Clear markers if there is a selection previously. note: ALSO DELETES CURRENT USER LOCATION MARKER
                                 googleMap.addMarker(new MarkerOptions()
                                         .position(latLng)
                                         .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_hazardicon)));
