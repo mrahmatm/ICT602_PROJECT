@@ -14,8 +14,6 @@ public class FirstPage extends AppCompatActivity {
 
     Button login, signUp;
 
-    Button testbutton;
-
     Button aboutButton;
 
     @Override
@@ -42,18 +40,6 @@ public class FirstPage extends AppCompatActivity {
             }
         });
 
-        //deletable
-        testbutton = (Button) findViewById(R.id.btnTest);
-        testbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(FirstPage.this, MapsActivity.class);
-                startActivity(i);
-            }
-        });
-        //end of deletable
-
-            //nanti yg deletable ni aku nak letak about button, so for now dia compact sikit la sbb nak test
     }
     public void About ( View view){
         Intent intent = new Intent( FirstPage.this, AboutPage.class);
