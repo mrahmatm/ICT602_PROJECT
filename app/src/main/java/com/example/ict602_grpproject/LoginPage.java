@@ -154,6 +154,8 @@ public class LoginPage extends AppCompatActivity {
                             //Admin
                             Toast.makeText(getApplicationContext(), "Welcome, Admin " + loggedUsername, Toast.LENGTH_LONG).show();
                             Intent map = new Intent(LoginPage.this, MapsActivity.class);
+                            map.putExtra("userID", userID);
+                            map.putExtra("userType", userType);
                             startActivity(map);
                         }
                         else if (userType.equals("2")) {
