@@ -58,17 +58,4 @@
         map:layout_constraintBottom_toTopOf="@+id/btnAdd"
         map:layout_constraintEnd_toEndOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="112dp"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        android:clickable="true"
-        map:backgroundTint="@android:color/holo_blue_dark"
-        map:layout_constraintBottom_toBottomOf="parent"
-        map:layout_constraintStart_toStartOf="parent"
-        map:srcCompat="?android:attr/actionModeFindDrawable" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
