@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:layout_constraintVertical_bias="0.039"
-        app:srcCompat="@drawable/anas" />
+        app:srcCompat="@drawable/anastry" />
 
     <TextView
         android:id="@+id/textView3"
@@ -57,7 +57,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.15"
-        app:srcCompat="@drawable/rahmat" />
+        app:srcCompat="@drawable/anastry" />
 
     <TextView
         android:id="@+id/textview4"
@@ -87,7 +87,7 @@
         app:layout_constraintTop_toTopOf="parent"
 
         app:layout_constraintVertical_bias="1.9"
-        app:srcCompat="@drawable/hakim" />
+        app:srcCompat="@drawable/anastry" />
 
     <TextView
         android:id="@+id/textview5"
@@ -146,7 +146,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textview4"
 
-        app:srcCompat="@drawable/haziq" />
+        app:srcCompat="@drawable/anastry" />
 
     <TextView
         android:layout_width="140dp"
