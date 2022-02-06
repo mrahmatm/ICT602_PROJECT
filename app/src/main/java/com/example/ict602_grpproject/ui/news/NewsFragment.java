@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import android.widget.Toast;
@@ -56,6 +57,7 @@ public class NewsFragment extends Fragment {
     SimpleDateFormat dateFormatOut = new SimpleDateFormat("d MMM yyyy hh:mm a");
     Date dateIn;
 
+    ProgressBar progress;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         newsViewModel = new ViewModelProvider(this).get(NewsViewModel.class);
@@ -65,6 +67,10 @@ public class NewsFragment extends Fragment {
 
         geocoder = new Geocoder(getContext(), Locale.getDefault());
         getHazards = Volley.newRequestQueue(getContext());
+        progress = (ProgressBar) binding.newsProgressBar;
+
+        ((Activity) getContext()).getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        progress.setVisibility(View.VISIBLE);
 
         makeRequest();
 
@@ -117,6 +123,9 @@ public class NewsFragment extends Fragment {
                     ListViewNews adapter = new ListViewNews(getContext(), maintitle, subtitle, imgid);
                     list = (ListView) binding.newsDashboard;
                     list.setAdapter(adapter);
+
+                    ((Activity) getContext()).getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                    progress.setVisibility(View.GONE);
 
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -27,7 +27,7 @@ public class ListViewNews extends ArrayAdapter<String> {
     }
 
     public View getView(int position, View view, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.list_view_news, null,true);
 
         TextView titleText = (TextView) rowView.findViewById(R.id.title);
