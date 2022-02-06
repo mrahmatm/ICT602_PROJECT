@@ -46,7 +46,7 @@ public class NewsFragment extends Fragment {
 
     Geocoder geocoder;
     List<Address> addresses;
-    String address, URL = "http://www.ict602.ml/loginUser.php";
+    String address, URL = "http://www.ict602.ml/getReports.php";
     RequestQueue getHazards;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,30 +58,56 @@ public class NewsFragment extends Fragment {
         geocoder = new Geocoder(getContext(), Locale.getDefault());
         getHazards = Volley.newRequestQueue(getContext());
 
-        //addresses = geocoder.getFromLocation(latitude, longitude, 1);
-        //address = addresses.get(0).getAddressLine(0);
-
-        String[] maintitle = {
-                "Jalan Impian Emas 17","Jalan Kempas Lama",
-                "Jalan Mewah Ria 2","Jalan Besar",
-        };
-
-        String[] subtitle = {
-                "5 Feb 2022, 08:30 AM","5 Feb 2022, 09:40 PM",
-                "6 Feb 2022, 12:53 PM","6 Feb 2022, 01:55 PM",
-        };
-
-        Integer[] imgid = {
-                R.drawable.h1_roadobstruction,R.drawable.h2_slipperyroad,
-                R.drawable.h3_pothole,R.drawable.h4_trafficaccident,
-        };
-
-        ListViewNews adapter = new ListViewNews(getContext(), maintitle, subtitle, imgid);
-        list = (ListView) binding.newsDashboard;
-        list.setAdapter(adapter);
+        makeRequest();
 
         return root;
     }
+
+    public void makeRequest() {
+        StringRequest send = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                //addresses = geocoder.getFromLocation(latitude, longitude, 1);
+                //address = addresses.get(0).getAddressLine(0);
+
+                String[] maintitle = {
+                        "Jalan Impian Emas 17","Jalan Kempas Lama",
+                        "Jalan Mewah Ria 2","Jalan Besar",
+                };
+
+                String[] subtitle = {
+                        "5 Feb 2022, 08:30 AM","5 Feb 2022, 09:40 PM",
+                        "6 Feb 2022, 12:53 PM","6 Feb 2022, 01:55 PM",
+                };
+
+                Integer[] imgid = {
+                        R.drawable.c1_roadobstructioncircle,R.drawable.c2_slipperyroadcircle,
+                        R.drawable.c3_potholecircle,R.drawable.c4_trafficaccidentcircle,
+                };
+
+                ListViewNews adapter = new ListViewNews(getContext(), maintitle, subtitle, imgid);
+                list = (ListView) binding.newsDashboard;
+                list.setAdapter(adapter);
+
+            }
+        }, errorListener) {
+            @Override
+            protected Map<String, String> getParams () {
+                Map<String, String> params = new HashMap<>();
+
+                return params;
+            }
+        };
+        getHazards.add(send);
+    }
+
+    public Response.ErrorListener errorListener = new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    };
 
     @Override
     public void onDestroyView() {
