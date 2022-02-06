@@ -28,7 +28,9 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -67,7 +69,6 @@ public class MapFragment extends Fragment {
     private MapViewModel mapViewModel;
     private FragmentMapBinding binding;
 
-
     TextView Ptitle, Pusername, Pdatetime; Button PbtnClose;
 
     //initialize variable
@@ -94,7 +95,7 @@ public class MapFragment extends Fragment {
 
     String currentUserGlobal, userNameGlobal, userTypeGlobal;
 
-    FloatingActionButton btnOpen, btnAdd, btnLogOut;
+    FloatingActionButton btnOpen, btnAdd, btnLogOut, btnRefresh;
 
     boolean doubleBackToExitPressedOnce = false;
 
@@ -116,6 +117,17 @@ public class MapFragment extends Fragment {
 
         btnAdd = (FloatingActionButton) binding.btnAdd;
         btnLogOut = (FloatingActionButton) binding.btnLogOut;
+        btnRefresh = (FloatingActionButton) binding.btnRefresh;
+
+        btnRefresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMap.clear();
+                getCurrentLocation();
+                sendRequest();
+
+            }
+        });
 
 
         dataHelper = new LocalDB(getContext());
