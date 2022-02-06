@@ -428,19 +428,19 @@ public class MapFragment extends Fragment {
         switch (hazard){
             case "1" :
                 Ptitle.setText("Road Obstruction");
-                icon.setImageResource(R.drawable.h1_roadobstruction);
+                icon.setImageResource(R.drawable.c1_roadobstructioncircle);
                 break;
             case "2" :
                 Ptitle.setText("Slippery Road");
-                icon.setImageResource(R.drawable.h2_slipperyroad);
+                icon.setImageResource(R.drawable.c2_slipperyroadcircle);
                 break;
             case "3" :
                 Ptitle.setText("Dangerous Pothole");
-                icon.setImageResource(R.drawable.h3_pothole);
+                icon.setImageResource(R.drawable.c3_potholecircle);
                 break;
             case "4" :
                 Ptitle.setText("Traffic Accident");
-                icon.setImageResource(R.drawable.h4_trafficaccident);
+                icon.setImageResource(R.drawable.c4_trafficaccidentcircle);
                 break;
         }
 

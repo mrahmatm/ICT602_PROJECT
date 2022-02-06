@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddMarker">
+    tools:context=".EditMarker">
 
     <TextView
         android:id="@+id/textView"
@@ -78,16 +78,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/btnUpdate"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btnUpdate" />
-
-    <TextView
-        android:id="@+id/txtPreviewID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grpRadio" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
