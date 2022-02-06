@@ -33,6 +33,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.ict602_grpproject.ui.map.MapFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -81,6 +82,8 @@ public class AddMarker extends AppCompatActivity implements OnMapReadyCallback {
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
         }
+
+        getSupportActionBar().setTitle("Add Marker");
         mMapView = (MapView) findViewById(R.id.mapView);
         mMapView.onCreate(mapViewBundle);
 
@@ -151,7 +154,7 @@ public class AddMarker extends AppCompatActivity implements OnMapReadyCallback {
                 //hold jap, buat read dulu
                 makeRequest(currentLocation, checkedHazard, userID, currentDateandTime);
 
-                Intent i = new Intent(AddMarker.this, MapsActivity.class);
+                Intent i = new Intent(AddMarker.this, MainActivity.class);
                 i.putExtra("userID", userID);
                 i.putExtra("userType", userType);
                 startActivity(i);
