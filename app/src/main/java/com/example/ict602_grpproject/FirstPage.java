@@ -5,6 +5,7 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -59,6 +60,16 @@ public class FirstPage extends AppCompatActivity {
                     map.putExtra("userType", loggedUserType);
                     finish();
                     startActivity(map);
+
+                    if (loggedUserType.equals("1")) {
+                        Toast.makeText(getApplicationContext(), "Welcome, Admin " + loggedUsername, Toast.LENGTH_LONG).show();
+                    }
+                    else if (loggedUserType.equals("2")) {
+                        Toast.makeText(getApplicationContext(), "Welcome, " + loggedUsername, Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "who you", Toast.LENGTH_LONG).show();
+                    }
                 }
                 else {
                     //none/multiple user data may exist

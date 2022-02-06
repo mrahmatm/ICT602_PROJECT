@@ -125,19 +125,8 @@ public class MapsActivity extends FragmentActivity {
         //for now, dummy
         String userID = extras.getString("userID");
         currentUserGlobal = userID;
-        userNameGlobal = extras.getString("username");
+        //userNameGlobal = extras.getString("username");
         userTypeGlobal = extras.getString("userType");
-
-        //login toast notification
-        if (userTypeGlobal.equals("1")) {
-            Toast.makeText(getApplicationContext(), "Welcome, Admin " + userNameGlobal, Toast.LENGTH_LONG).show();
-        }
-        else if (userTypeGlobal.equals("2")) {
-            Toast.makeText(getApplicationContext(), "Welcome, " + userNameGlobal, Toast.LENGTH_LONG).show();
-        }
-        else {
-            Toast.makeText(getApplicationContext(), "who you", Toast.LENGTH_LONG).show();
-        }
 
         //String finalUserID = userID;
 

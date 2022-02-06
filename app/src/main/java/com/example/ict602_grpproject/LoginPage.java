@@ -160,6 +160,16 @@ public class LoginPage extends AppCompatActivity {
                             map.putExtra("userType", userType);
                             finish();
                             startActivity(map);
+
+                            if (userType.equals("1")) {
+                                Toast.makeText(getApplicationContext(), "Welcome, Admin " + loggedUsername, Toast.LENGTH_LONG).show();
+                            }
+                            else if (userType.equals("2")) {
+                                Toast.makeText(getApplicationContext(), "Welcome, " + loggedUsername, Toast.LENGTH_LONG).show();
+                            }
+                            else {
+                                Toast.makeText(getApplicationContext(), "who you", Toast.LENGTH_LONG).show();
+                            }
                         }
                         else {
                             Toast.makeText(getApplicationContext(), "who you. sign up la aiyo", Toast.LENGTH_LONG).show();
