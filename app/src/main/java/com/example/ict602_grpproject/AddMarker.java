@@ -154,6 +154,7 @@ public class AddMarker extends AppCompatActivity implements OnMapReadyCallback {
                 i.putExtra("userID", userID);
                 i.putExtra("userType", userType);
                 startActivity(i);
+                finish();
             }
         });
     }

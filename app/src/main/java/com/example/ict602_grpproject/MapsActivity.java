@@ -94,9 +94,11 @@ public class MapsActivity extends FragmentActivity {
         btnAdd = (FloatingActionButton) findViewById(R.id.btnAdd);
         btnLogOut = (FloatingActionButton) findViewById(R.id.btnLogOut);
 
-        gson = new GsonBuilder().create();
 
         dataHelper = new LocalDB(this);
+        gson = new GsonBuilder().create();
+
+        //dataHelper = new LocalDB(this); //possible duplicate
 
         //start of map
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -138,7 +140,10 @@ public class MapsActivity extends FragmentActivity {
                 //pass the current location to the add marker class through intent shit
                 i.putExtra("currentLocation", currentLocation);
                 i.putExtra("userID", userID);
-                startActivity(i);
+                if(currentLocation != null)
+                    startActivity(i);
+                else
+                    Toast.makeText(getApplicationContext(), "Unable to fetch GPS location.", Toast.LENGTH_LONG).show();
 
             }
         });
