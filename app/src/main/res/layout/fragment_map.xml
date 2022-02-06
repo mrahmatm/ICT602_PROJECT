@@ -41,7 +41,9 @@
         android:src="@drawable/ic_addmarker"
         map:backgroundTint="@android:color/holo_green_dark"
         map:layout_constraintBottom_toBottomOf="parent"
-        map:layout_constraintEnd_toEndOf="parent" />
+        map:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnLogOut"
@@ -52,16 +54,8 @@
         android:src="@drawable/ic_baseline_exit_to_app_24"
         map:backgroundTint="@android:color/darker_gray"
         map:layout_constraintBottom_toTopOf="@+id/btnAdd"
-        map:layout_constraintEnd_toEndOf="parent" />
+        map:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        android:clickable="true"
-        map:backgroundTint="@android:color/holo_blue_dark"
-        map:layout_constraintBottom_toBottomOf="parent"
-        map:layout_constraintStart_toStartOf="parent"
-        map:srcCompat="?android:attr/actionModeFindDrawable" />
 </androidx.constraintlayout.widget.ConstraintLayout>

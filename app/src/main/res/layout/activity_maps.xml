@@ -42,18 +42,5 @@
         android:backgroundTint="@android:color/darker_gray"
         map:backgroundTint="@android:color/darker_gray" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        map:srcCompat="?android:attr/actionModeFindDrawable"
-        android:id="@+id/floatingActionButton"
-        map:layout_constraintBottom_toBottomOf="parent"
-        map:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="10dp"
-        android:layout_marginStart="10dp"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        map:backgroundTint="@android:color/holo_blue_dark" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 
