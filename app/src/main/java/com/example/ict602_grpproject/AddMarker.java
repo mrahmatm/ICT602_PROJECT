@@ -13,7 +13,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
-import android.icu.text.SimpleDateFormat;
+//import android.icu.text.SimpleDateFormat;
+import java.text.SimpleDateFormat;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -164,7 +165,7 @@ public class AddMarker extends AppCompatActivity implements OnMapReadyCallback {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(), "Connection OK!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Connection OK!", Toast.LENGTH_SHORT).show();
             }
         }, errorListener){
             @Override
@@ -264,9 +265,15 @@ public class AddMarker extends AppCompatActivity implements OnMapReadyCallback {
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(@NonNull LatLng latLng) {
-                Toast.makeText(getApplicationContext(), "Map location: " + latLng, Toast.LENGTH_LONG).show();
+                googleMap.clear(); // Clear markers if there is a selection previously. note: ALSO DELETES CURRENT USER LOCATION MARKER
+                googleMap.addMarker(new MarkerOptions()
+                        .position(latLng)
+                        .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_hazardicon)));
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(AddMarker.this);
+                globalUseLocation = latLng;
+                //Toast.makeText(getApplicationContext(), "Map location: " + latLng, Toast.LENGTH_LONG).show();
+
+                /*(AlertDialog.Builder builder = new AlertDialog.Builder(AddMarker.this);
                 builder.setCancelable(true);
                 builder.setTitle("Hazard Location");
                 builder.setMessage("Set Location?");
@@ -280,7 +287,8 @@ public class AddMarker extends AppCompatActivity implements OnMapReadyCallback {
                                         .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_hazardicon)));
 
                                 globalUseLocation = latLng;
-                                Toast.makeText(getApplicationContext(), "Hazard location confirmed!", Toast.LENGTH_SHORT).show();
+
+                                //Toast.makeText(getApplicationContext(), "Hazard location confirmed!", Toast.LENGTH_SHORT).show();
                             }
                         });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -291,7 +299,7 @@ public class AddMarker extends AppCompatActivity implements OnMapReadyCallback {
                 });
 
                 AlertDialog dialog = builder.create();
-                dialog.show();
+                dialog.show();*/
             }
         });
     }

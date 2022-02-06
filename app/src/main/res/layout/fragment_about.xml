@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AboutPage">
+    tools:context=".ui.about.AboutFragment">
 
     <TextView
         android:id="@+id/textView2"
@@ -52,11 +52,10 @@
         android:layout_height="133dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.665"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.646"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15"
+        app:layout_constraintVertical_bias="0.107"
         app:srcCompat="@drawable/rahmat" />
 
     <TextView
@@ -161,6 +160,5 @@
         app:layout_constraintTop_toBottomOf="@+id/haziq"
 
         app:layout_constraintVertical_bias="0.0"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
