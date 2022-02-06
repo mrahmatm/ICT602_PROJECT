@@ -11,10 +11,13 @@
         <entry key="..\:/-Codes/ICT602GroupProject/app/src/main/res/layout/activity_maps.xml" value="0.36666666666666664" />
         <entry key="..\:/-Codes/ICT602GroupProject/app/src/main/res/layout/activity_news.xml" value="0.36666666666666664" />
         <entry key="..\:/-Codes/ICT602GroupProject/app/src/main/res/layout/activity_sign_up_page.xml" value="0.35260416666666666" />
+        <entry key="..\:/-Codes/ICT602GroupProject/app/src/main/res/layout/fragment_about.xml" value="0.36666666666666664" />
         <entry key="..\:/-Codes/ICT602GroupProject/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
         <entry key="..\:/-Codes/ICT602GroupProject/app/src/main/res/layout/fragment_map.xml" value="0.36666666666666664" />
         <entry key="..\:/-Codes/ICT602GroupProject/app/src/main/res/layout/fragment_news.xml" value="0.36666666666666664" />
         <entry key="..\:/-Codes/ICT602GroupProject/app/src/main/res/layout/fragment_notifications.xml" value="0.36666666666666664" />
+        <entry key="..\:/-Codes/ICT602GroupProject/app/src/main/res/layout/list_view.xml" value="0.365625" />
+        <entry key="..\:/-Codes/ICT602GroupProject/app/src/main/res/layout/list_view_news.xml" value="0.365625" />
         <entry key="..\:/-Codes/ICT602GroupProject/app/src/main/res/layout/map_popup.xml" value="0.36666666666666664" />
         <entry key="..\:/-Codes/ICT602GroupProject/app/src/main/res/layout/map_popup_admin.xml" value="0.36666666666666664" />
         <entry key="..\:/CLASS SEMESTER 3/MOBILE APPS DEVELOPMENT/ProjectWaze/app/src/main/res/layout/activity_about_page.xml" value="0.22" />
