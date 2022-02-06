@@ -54,7 +54,7 @@ import java.util.Map;
 public class AddMarker extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final String MAPVIEW_BUNDLE_KEY = "MapViewBundleKey";
-    Button btnSubmit, btnPlacePick;
+    Button btnSubmit;
     EditText name, type, desc;
 
     RequestQueue queue;
@@ -113,7 +113,6 @@ public class AddMarker extends AppCompatActivity implements OnMapReadyCallback {
         queue = Volley.newRequestQueue(getApplicationContext());
 
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
-        btnPlacePick = (Button)findViewById(R.id.btnPickLocation);
 
         //data passing
         Bundle extras = getIntent().getExtras();
