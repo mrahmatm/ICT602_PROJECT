@@ -1,102 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginPage">
 
     <TextView
-        android:text="Login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/Login_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:text="Login"
         android:textSize="22sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="100dp" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:id="@+id/Login_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="CristianoRonaldo"
-        android:ems="10"
-        android:id="@+id/Login_username"
         android:layout_marginTop="1dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintStart_toStartOf="@+id/Login_textView5"
         app:layout_constraintTop_toBottomOf="@+id/Login_textView5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:ignore="SpeakableTextPresentCheck"
-        android:minHeight="48dp" />
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
-        android:text="Username"
+        android:id="@+id/Login_textView5"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
-        android:id="@+id/Login_textView5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="30dp"
+        android:text="Username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Login_textView" />
 
     <TextView
-        android:text="Password"
+        android:id="@+id/Login_textView4"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
-        android:id="@+id/Login_textView4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="25dp"
+        android:text="Password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Login_username" />
 
     <EditText
+        android:id="@+id/Login_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:hint="Ronaldo2001"
-
+        android:layout_marginTop="2dp"
         android:ems="10"
-        android:id="@+id/Login_password"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="1dp"
-        app:layout_constraintTop_toBottomOf="@+id/Login_textView4"
+        android:inputType="textPassword"
         android:minHeight="48dp"
+        app:layout_constraintStart_toStartOf="@+id/Login_textView4"
+        app:layout_constraintTop_toBottomOf="@+id/Login_textView4"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
-        android:text="Login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/Login_button"
-        android:textAllCaps="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        app:layout_constraintTop_toBottomOf="@+id/Login_password"
-        android:layout_marginTop="30dp" />
-
-    <Button
-        android:text="Back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/Login_button2"
+        android:layout_marginTop="87dp"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:text="Login"
         android:textAllCaps="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/Login_button"
-        android:backgroundTint="@android:color/darker_gray" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noAccount" />
+
+    <TextView
+        android:id="@+id/noAccount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="31dp"
+        android:gravity="center"
+        android:text="@string/noAccount"
+        android:textColor="@color/teal_700"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Login_password" />
 
     <ProgressBar
         android:id="@+id/Login_progress"
