@@ -23,6 +23,9 @@
         android:theme="@style/Theme.ICT602_GRPPROJECT"
         android:usesCleartextTraffic="true" >
         <activity
+            android:name=".News"
+            android:exported="false" />
+        <activity
             android:name=".AboutPage"
             android:exported="false" />
         <activity

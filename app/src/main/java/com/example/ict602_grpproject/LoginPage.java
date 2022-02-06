@@ -156,7 +156,7 @@ public class LoginPage extends AppCompatActivity {
                             Intent map = new Intent(LoginPage.this, MapsActivity.class);
 
                             map.putExtra("userID", userID);
-                            map.putExtra("username", loggedUsername);
+                            //map.putExtra("username", loggedUsername);
                             map.putExtra("userType", userType);
                             finish();
                             startActivity(map);
