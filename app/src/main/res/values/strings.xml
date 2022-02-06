@@ -1,9 +1,10 @@
 <resources>
-    <string name="app_name">ICT602_GRPPROJECT</string>
+    <string name="app_name">Crowdsourcing Hazard</string>
     <string name="title_map">Map</string>
     <string name="title_news">News</string>
     <string name="title_about">About</string>
     <string name="title_activity_maps">MapsActivity</string>
 
     <string name="hyperlink"><a href="https://github.com/mrahmatm/ICT602_PROJECT.git">WWW.GITHUB.COM</a></string>
+    <string name="noAccount"><u>I don\'t have an account.</u></string>
 </resources>

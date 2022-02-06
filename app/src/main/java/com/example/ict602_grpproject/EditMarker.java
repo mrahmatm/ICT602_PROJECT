@@ -136,7 +136,7 @@ public class EditMarker extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URLUpdate, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(), "Connection OK!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Connection OK!", Toast.LENGTH_SHORT).show();
             }
         }, errorListener) {
             @Override

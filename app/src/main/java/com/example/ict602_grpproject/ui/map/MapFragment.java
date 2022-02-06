@@ -355,7 +355,7 @@ public class MapFragment extends Fragment {
 
                         if(currentUserGlobal.equals(userID)  || userTypeGlobal.equals("Admin") || userTypeGlobal.equals("1")){
                             isEditable[0] = true;
-                            Toast.makeText(getContext(), "Perh boleh edit sia", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getContext(), "Perh boleh edit sia", Toast.LENGTH_LONG).show();
                             i.putExtra("currentLocation", currentLocation);
                             i.putExtra("userID", currentUserGlobal);
                             i.putExtra("userType", userTypeGlobal);
@@ -377,7 +377,7 @@ public class MapFragment extends Fragment {
                         //Toast.makeText(getContext(), "Clicked: on custom marker!", Toast.LENGTH_SHORT).show();
                         return false;
                     }else{
-                        Toast.makeText(getContext(), "This is you!", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(), "This is you!", Toast.LENGTH_SHORT).show();
                         return true;
                     }
 
@@ -426,11 +426,11 @@ public class MapFragment extends Fragment {
                 icon.setImageResource(R.drawable.h2_slipperyroad);
                 break;
             case "3" :
-                Ptitle.setText("Dangerous Pothol");
+                Ptitle.setText("Dangerous Pothole");
                 icon.setImageResource(R.drawable.h3_pothole);
                 break;
             case "4" :
-                Ptitle.setText("Accident");
+                Ptitle.setText("Traffic Accident");
                 icon.setImageResource(R.drawable.h4_trafficaccident);
                 break;
         }
