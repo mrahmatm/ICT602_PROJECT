@@ -153,7 +153,8 @@ public class MapsActivity extends FragmentActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 localDB = dataHelper.getWritableDatabase();
                                 localDB.execSQL("delete from login;");
-                                finish();
+                                Intent firstpage = new Intent(MapsActivity.this, FirstPage.class);
+                                startActivity(firstpage);
                             }
                         });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
