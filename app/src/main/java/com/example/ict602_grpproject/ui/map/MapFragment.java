@@ -25,11 +25,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.android.volley.Request;
@@ -42,7 +40,6 @@ import com.example.ict602_grpproject.AddMarker;
 import com.example.ict602_grpproject.EditMarker;
 import com.example.ict602_grpproject.FirstPage;
 import com.example.ict602_grpproject.LocalDB;
-import com.example.ict602_grpproject.MapsActivity;
 import com.example.ict602_grpproject.Marker;
 import com.example.ict602_grpproject.R;
 import com.example.ict602_grpproject.databinding.FragmentMapBinding;
@@ -351,7 +348,7 @@ public class MapFragment extends Fragment {
                         //Toast.makeText(getContext(), "reportID: " + reportID +
                         //       " hazardID: " + hazardID + " userID: " + userID, Toast.LENGTH_LONG).show();
 
-                        Toast.makeText(getContext(), "Your autho: " + userTypeGlobal, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(), "Your autho: " + userTypeGlobal, Toast.LENGTH_SHORT).show();
 
                         if(currentUserGlobal.equals(userID)  || userTypeGlobal.equals("Admin") || userTypeGlobal.equals("1")){
                             isEditable[0] = true;

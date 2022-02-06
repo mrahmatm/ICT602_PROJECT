@@ -116,8 +116,4 @@ public class FirstPage extends AppCompatActivity {
         });*/
 
     }
-    public void About ( View view){
-        Intent intent = new Intent( FirstPage.this, AboutPage.class);
-        startActivity(intent);
-    }
 }

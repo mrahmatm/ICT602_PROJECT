@@ -65,6 +65,8 @@ public class EditMarker extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_marker);
 
+        getSupportActionBar().setTitle("Edit Marker");
+
         radGrp = (RadioGroup) findViewById(R.id.grpRadio);
         radBtn1 = (RadioButton) findViewById(R.id.radID1);
         radBtn2 = (RadioButton) findViewById(R.id.radID2);
@@ -108,7 +110,7 @@ public class EditMarker extends AppCompatActivity {
 
                     String selected = checkRadio(v);
                     sendUpdateRequest(targetReport, selected);
-                    Intent i = new Intent(EditMarker.this, MapsActivity.class);
+                    Intent i = new Intent(EditMarker.this, MainActivity.class);
                     i.putExtra("userID", userID);
                     i.putExtra("userType", userType);
                     startActivity(i);
@@ -120,7 +122,7 @@ public class EditMarker extends AppCompatActivity {
                 public void onClick(View v) {
 
                     sendDeleteRequest(targetReport);
-                    Intent i = new Intent(EditMarker.this, MapsActivity.class);
+                    Intent i = new Intent(EditMarker.this, MainActivity.class);
                     i.putExtra("userID", userID);
                     i.putExtra("userType", userType);
                     startActivity(i);
