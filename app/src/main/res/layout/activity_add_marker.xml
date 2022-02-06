@@ -8,14 +8,16 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_marginStart="146dp"
-        android:layout_marginTop="77dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="145dp"
         android:text="Hazard Type"
         app:flow_horizontalAlign="center"
         app:layout_constraintEnd_toEndOf="@+id/grpRadio"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

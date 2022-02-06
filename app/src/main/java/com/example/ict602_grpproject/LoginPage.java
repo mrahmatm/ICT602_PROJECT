@@ -17,6 +17,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +25,8 @@ import java.util.Map;
 public class LoginPage extends AppCompatActivity {
 
     EditText username, password;
-    Button login, back;
+    TextView noAcc;
+    Button login;
     RequestQueue signin;
     ProgressBar progress;
     String URL = "http://www.ict602.ml/loginUser.php", statusCode, statusDesc, userID, loggedUsername, userType;
@@ -41,8 +43,18 @@ public class LoginPage extends AppCompatActivity {
         username = (EditText) findViewById(R.id.Login_username);
         password = (EditText) findViewById(R.id.Login_password);
         login = (Button) findViewById(R.id.Login_button);
-        back = (Button) findViewById(R.id.Login_button2);
         progress = (ProgressBar) findViewById(R.id.Login_progress);
+
+        noAcc = (TextView) findViewById(R.id.noAccount);
+
+        noAcc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent signup = new Intent(LoginPage.this, SignUpPage.class);
+
+                startActivity(signup);
+            }
+        });
 
         signin = Volley.newRequestQueue(getApplicationContext());
 
@@ -56,12 +68,12 @@ public class LoginPage extends AppCompatActivity {
                 progress.setVisibility(View.VISIBLE);
             }
         });
-        back.setOnClickListener(new View.OnClickListener() {
+        /*back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
-        });
+        });*/
     }
 
     public void makeRequest() {
@@ -153,7 +165,8 @@ public class LoginPage extends AppCompatActivity {
 
                         if (userType.equals("1") || userType.equals("2")) {
                             //check if userID exist
-                            Intent map = new Intent(LoginPage.this, MapsActivity.class);
+                            //Intent map = new Intent(LoginPage.this, MapsActivity.class);
+                            Intent map = new Intent(LoginPage.this, MainActivity.class);
 
                             map.putExtra("userID", userID);
                             //map.putExtra("username", loggedUsername);
