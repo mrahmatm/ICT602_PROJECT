@@ -151,25 +151,14 @@ public class LoginPage extends AppCompatActivity {
 //                        cursor.moveToFirst();
 //                        String countCheck = String.valueOf(cursor.getCount());
 
-                        if (userType.equals("1")) {
-                            //Admin
-                            //Toast.makeText(getApplicationContext(), "Welcome, Admin " + loggedUsername, Toast.LENGTH_LONG).show();
+                        if (userType.equals("1") || userType.equals("2")) {
+                            //check if userID exist
                             Intent map = new Intent(LoginPage.this, MapsActivity.class);
 
                             map.putExtra("userID", userID);
                             map.putExtra("username", loggedUsername);
                             map.putExtra("userType", userType);
-                            startActivity(map);
-                        }
-                        else if (userType.equals("2")) {
-                            //Peasant
-                            //Toast.makeText(getApplicationContext(), "Welcome, " + loggedUsername, Toast.LENGTH_LONG).show();
-                            Intent map = new Intent(LoginPage.this, MapsActivity.class);
-
-                            //upon intent, steal the damn data
-                            map.putExtra("userID", userID);
-                            map.putExtra("username", loggedUsername);
-                            map.putExtra("userType", userType);
+                            finish();
                             startActivity(map);
                         }
                         else {

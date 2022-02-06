@@ -57,6 +57,7 @@ public class FirstPage extends AppCompatActivity {
                     map.putExtra("userID", loggedUserID);
                     map.putExtra("username", loggedUsername);
                     map.putExtra("userType", loggedUserType);
+                    finish();
                     startActivity(map);
                 }
                 else {

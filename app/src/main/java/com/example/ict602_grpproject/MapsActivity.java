@@ -1,5 +1,7 @@
 package com.example.ict602_grpproject;
 
+import android.os.Handler;
+import android.os.Looper;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -81,6 +83,8 @@ public class MapsActivity extends FragmentActivity {
     String currentUserGlobal, userNameGlobal, userTypeGlobal;
 
     FloatingActionButton btnOpen, btnAdd, btnLogOut;
+
+    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,6 +170,7 @@ public class MapsActivity extends FragmentActivity {
                                 localDB = dataHelper.getWritableDatabase();
                                 localDB.execSQL("delete from login;");
                                 Intent firstpage = new Intent(MapsActivity.this, FirstPage.class);
+                                finish();
                                 startActivity(firstpage);
                             }
                         });
@@ -422,5 +427,21 @@ public class MapsActivity extends FragmentActivity {
         dialog.show();
     }
 
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
 
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }
 }
