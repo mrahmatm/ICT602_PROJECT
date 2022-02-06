@@ -72,11 +72,6 @@ public class AddMarker extends AppCompatActivity implements OnMapReadyCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_marker);
 
-        //mapview
-
-        // *** IMPORTANT ***
-        // MapView requires that the Bundle you pass contain _ONLY_ MapView SDK
-        // objects or sub-Bundles.
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAPVIEW_BUNDLE_KEY);
@@ -85,8 +80,6 @@ public class AddMarker extends AppCompatActivity implements OnMapReadyCallback {
         mMapView.onCreate(mapViewBundle);
 
         mMapView.getMapAsync(this);
-
-        //end of mapview
 
         radGrp = (RadioGroup) findViewById(R.id.grpRadio);
         radBtn1 = (RadioButton) findViewById(R.id.radID1);
