@@ -53,12 +53,12 @@ public class FirstPage extends AppCompatActivity {
                     loggedUsername = cursor.getString(2);
                     loggedUserType = cursor.getString(3);
 
-                    Intent map = new Intent(FirstPage.this, MapsActivity.class);
+                    Intent map = new Intent(FirstPage.this, MainActivity.class);
 
                     map.putExtra("userID", loggedUserID);
                     map.putExtra("username", loggedUsername);
                     map.putExtra("userType", loggedUserType);
-                    finish();
+                    //finish();
                     startActivity(map);
 
                     if (loggedUserType.equals("1")) {

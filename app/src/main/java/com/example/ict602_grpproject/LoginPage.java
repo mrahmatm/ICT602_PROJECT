@@ -153,12 +153,13 @@ public class LoginPage extends AppCompatActivity {
 
                         if (userType.equals("1") || userType.equals("2")) {
                             //check if userID exist
-                            Intent map = new Intent(LoginPage.this, MapsActivity.class);
+                            //Intent map = new Intent(LoginPage.this, MapsActivity.class);
+                            Intent map = new Intent(LoginPage.this, MainActivity.class);
 
                             map.putExtra("userID", userID);
                             map.putExtra("username", loggedUsername);
                             map.putExtra("userType", userType);
-                            finish();
+                            //finish();
                             startActivity(map);
 
                             if (userType.equals("1")) {
