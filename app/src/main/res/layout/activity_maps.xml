@@ -8,35 +8,52 @@
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        map:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        tools:context=".MapsActivity"
         map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintStart_toStartOf="parent"
         map:layout_constraintTop_toTopOf="parent"
-        tools:context=".MapsActivity" />
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintBottom_toBottomOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="134dp"
         android:clickable="true"
         android:src="@drawable/ic_addmarker"
         map:layout_constraintBottom_toBottomOf="parent"
-        map:layout_constraintEnd_toEndOf="parent" />
+        map:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@android:color/holo_green_dark"
+        map:backgroundTint="@android:color/holo_green_dark" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnLogOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="20dp"
         android:clickable="true"
         android:src="@drawable/ic_baseline_exit_to_app_24"
         map:layout_constraintBottom_toTopOf="@+id/btnAdd"
-        map:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginBottom="10dp"
+        map:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@android:color/darker_gray"
+        map:backgroundTint="@android:color/darker_gray" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        map:srcCompat="?android:attr/actionModeFindDrawable"
+        android:id="@+id/floatingActionButton"
+        map:layout_constraintBottom_toBottomOf="parent"
+        map:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        map:backgroundTint="@android:color/holo_blue_dark" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
