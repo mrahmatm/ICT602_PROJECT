@@ -45,6 +45,7 @@ public class LoginPage extends AppCompatActivity {
         progress = (ProgressBar) findViewById(R.id.Login_progress);
 
         signin = Volley.newRequestQueue(getApplicationContext());
+
         dataHelper = new LocalDB(this);
 
         login.setOnClickListener(new View.OnClickListener() {
@@ -142,31 +143,33 @@ public class LoginPage extends AppCompatActivity {
                         //precaution to not create multiple userid in local db
                         localDB = dataHelper.getWritableDatabase();
                         localDB.execSQL("delete from login;");
-                        localDB.execSQL("insert into login(id, userid) values(null, '"+ userID +"');");
+                        localDB.execSQL("insert into login(id, userid, username, usertype) values(null, '"+ userID +"', '"+ loggedUsername +"', '"+ userType +"');");
 
                         //count local db data
-                        localDB = dataHelper.getReadableDatabase();
-                        cursor = localDB.rawQuery("select * from login", null);
-                        cursor.moveToFirst();
-                        String countCheck = String.valueOf(cursor.getCount());
+//                        localDB = dataHelper.getReadableDatabase();
+//                        cursor = localDB.rawQuery("select * from login", null);
+//                        cursor.moveToFirst();
+//                        String countCheck = String.valueOf(cursor.getCount());
 
                         if (userType.equals("1")) {
                             //Admin
-                            Toast.makeText(getApplicationContext(), "Welcome, Admin " + loggedUsername, Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(), "Welcome, Admin " + loggedUsername, Toast.LENGTH_LONG).show();
                             Intent map = new Intent(LoginPage.this, MapsActivity.class);
+
                             map.putExtra("userID", userID);
+                            map.putExtra("username", loggedUsername);
                             map.putExtra("userType", userType);
                             startActivity(map);
                         }
                         else if (userType.equals("2")) {
                             //Peasant
-                            Toast.makeText(getApplicationContext(), "Welcome, " + loggedUsername, Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(), "Welcome, " + loggedUsername, Toast.LENGTH_LONG).show();
                             Intent map = new Intent(LoginPage.this, MapsActivity.class);
 
                             //upon intent, steal the damn data
                             map.putExtra("userID", userID);
+                            map.putExtra("username", loggedUsername);
                             map.putExtra("userType", userType);
-
                             startActivity(map);
                         }
                         else {

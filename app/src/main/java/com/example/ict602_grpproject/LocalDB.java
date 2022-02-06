@@ -14,7 +14,7 @@ public class LocalDB extends SQLiteOpenHelper {
     //to store logged-in user locally
     @Override
     public void onCreate(SQLiteDatabase localDB) {
-        localDB.execSQL("create table login(id integer primary key autoincrement, userid text null);");
+        localDB.execSQL("create table login(id integer primary key autoincrement, userid text null, username text null, usertype text null);");
     }
 
     @Override

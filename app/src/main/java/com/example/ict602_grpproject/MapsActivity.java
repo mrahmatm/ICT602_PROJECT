@@ -78,7 +78,7 @@ public class MapsActivity extends FragmentActivity {
 
     HashMap<LatLng, String> map = new HashMap<LatLng, String>();
 
-    String currentUserGlobal,userTypeGlobal;
+    String currentUserGlobal, userNameGlobal, userTypeGlobal;
 
     FloatingActionButton btnOpen, btnAdd, btnLogOut;
 
@@ -87,7 +87,12 @@ public class MapsActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
+        btnAdd = (FloatingActionButton) findViewById(R.id.btnAdd);
+        btnLogOut = (FloatingActionButton) findViewById(R.id.btnLogOut);
+
         gson = new GsonBuilder().create();
+
+        dataHelper = new LocalDB(this);
 
         //start of map
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -116,12 +121,21 @@ public class MapsActivity extends FragmentActivity {
         //for now, dummy
         String userID = extras.getString("userID");
         currentUserGlobal = userID;
-        Toast.makeText(getApplicationContext(), "Your id: " + currentUserGlobal, Toast.LENGTH_LONG).show();
+        userNameGlobal = extras.getString("username");
         userTypeGlobal = extras.getString("userType");
-        //String finalUserID = userID;
 
-        btnAdd = (FloatingActionButton) findViewById(R.id.btnAdd);
-        btnLogOut = (FloatingActionButton) findViewById(R.id.btnLogOut);
+        //login toast notification
+        if (userTypeGlobal.equals("1")) {
+            Toast.makeText(getApplicationContext(), "Welcome, Admin " + userNameGlobal, Toast.LENGTH_LONG).show();
+        }
+        else if (userTypeGlobal.equals("2")) {
+            Toast.makeText(getApplicationContext(), "Welcome, " + userNameGlobal, Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(getApplicationContext(), "who you", Toast.LENGTH_LONG).show();
+        }
+
+        //String finalUserID = userID;
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,8 +149,6 @@ public class MapsActivity extends FragmentActivity {
 
             }
         });
-
-        dataHelper = new LocalDB(this);
 
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
