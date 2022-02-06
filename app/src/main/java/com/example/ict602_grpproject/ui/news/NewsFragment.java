@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,13 +30,14 @@ import com.example.ict602_grpproject.LoginPage;
 import com.example.ict602_grpproject.MainActivity;
 import com.example.ict602_grpproject.R;
 import com.example.ict602_grpproject.databinding.FragmentNewsBinding;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class NewsFragment extends Fragment {
 
@@ -46,8 +48,14 @@ public class NewsFragment extends Fragment {
 
     Geocoder geocoder;
     List<Address> addresses;
-    String address, URL = "http://www.ict602.ml/getReports.php";
+    String address, URL = "http://www.ict602.ml/getReports.php", nHazard, nTime;
     RequestQueue getHazards;
+
+    Double lat, longn;
+    SimpleDateFormat dateFormatIn = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat dateFormatOut = new SimpleDateFormat("d MMM yyyy hh:mm a");
+    Date dateIn;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         newsViewModel = new ViewModelProvider(this).get(NewsViewModel.class);
@@ -68,37 +76,57 @@ public class NewsFragment extends Fragment {
             @Override
             public void onResponse(String response) {
 
-                //addresses = geocoder.getFromLocation(latitude, longitude, 1);
-                //address = addresses.get(0).getAddressLine(0);
+                try {
+                    JSONArray jsonArray = new JSONArray(response);
 
-                String[] maintitle = {
-                        "Jalan Impian Emas 17","Jalan Kempas Lama",
-                        "Jalan Mewah Ria 2","Jalan Besar",
-                };
+                    String[] subtitle = new String[jsonArray.length()];
+                    String[] maintitle = new String[jsonArray.length()];
+                    Integer[] imgid = new Integer[jsonArray.length()];
 
-                String[] subtitle = {
-                        "5 Feb 2022, 08:30 AM","5 Feb 2022, 09:40 PM",
-                        "6 Feb 2022, 12:53 PM","6 Feb 2022, 01:55 PM",
-                };
+                    if(jsonArray.length() > 0) {
+                        for (int i = 0; i < jsonArray.length(); i++){
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                Integer[] imgid = {
-                        R.drawable.c1_roadobstructioncircle,R.drawable.c2_slipperyroadcircle,
-                        R.drawable.c3_potholecircle,R.drawable.c4_trafficaccidentcircle,
-                };
+                            if (jsonObject.getString("Hazard").equals("Road Obstruction")) {
+                                imgid[i] = R.drawable.c1_roadobstructioncircle;
+                            }
+                            else if (jsonObject.getString("Hazard").equals("Slippery Road")) {
+                                imgid[i] = R.drawable.c2_slipperyroadcircle;
+                            }
+                            else if (jsonObject.getString("Hazard").equals("Dangerous Pothole")) {
+                                imgid[i] = R.drawable.c3_potholecircle;
+                            }
+                            else if (jsonObject.getString("Hazard").equals("Accident")) {
+                                imgid[i] = R.drawable.c4_trafficaccidentcircle;
+                            }
+                            else {
+                                imgid[i] = R.drawable.c4_trafficaccidentcircle;
+                            }
 
-                ListViewNews adapter = new ListViewNews(getContext(), maintitle, subtitle, imgid);
-                list = (ListView) binding.newsDashboard;
-                list.setAdapter(adapter);
+                            dateIn = dateFormatIn.parse(jsonObject.getString("Time"));
+                            subtitle[i] = String.valueOf(dateFormatOut.format(dateIn));
 
+                            lat = jsonObject.getDouble("Latitude");
+                            longn = jsonObject.getDouble("Longitude");
+                            addresses = geocoder.getFromLocation(lat, longn, 1);
+                            //Log.d("Address " + jsonObject.getString("ReportID"), addresses.get(0).getAddressLine(0));
+                            maintitle[i] = addresses.get(0).getAddressLine(0);
+                        }
+                    }
+
+                    ListViewNews adapter = new ListViewNews(getContext(), maintitle, subtitle, imgid);
+                    list = (ListView) binding.newsDashboard;
+                    list.setAdapter(adapter);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
-        }, errorListener) {
-            @Override
-            protected Map<String, String> getParams () {
-                Map<String, String> params = new HashMap<>();
-
-                return params;
-            }
-        };
+        }, errorListener);
         getHazards.add(send);
     }
 
